@@ -14,9 +14,13 @@ def home():
     return render_template('pages/placeholder.home.html')
 
 
-@blueprint.route('/about')
-def about():
-    return render_template('pages/placeholder.about.html')
+@blueprint.route('/rules')
+def rules():
+    return render_template('pages/rules.html')
+
+@blueprint.route('/classical')
+def classical():
+    return render_template('pages/classical.html')
 
 
 @blueprint.route('/login')
