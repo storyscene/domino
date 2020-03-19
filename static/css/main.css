@@ -11,6 +11,10 @@
 html {
   overflow-y: scroll;
 }
+body {
+  font-family: Montserrat, sans-serif;
+  font-size: small;
+}
 a {
   cursor: pointer;
 }
@@ -27,11 +31,50 @@ a {
   color: #FFF;
 }
 
-#feedback { font-size: 1.4em; }
-#selectable .ui-selecting { background: #FECA40; }
-#selectable .ui-selected { background: #F39814; color: white; }
-#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+/* dominoes */
+
+.trio {
+  display: flex;
+  width: min-content;
+  margin: 8px 8px;
+}
+
+.pair {
+  display: flex;
+  width: min-content;
+  justify-self: center;
+  margin: 8px 8px;
+  grid-area: pair;
+}
+
+.domino {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60px;
+  width: 24px;
+  padding: 8px;
+  margin: 0 2px;
+  align-content: center;
+  text-align: center;
+  background-color: #f7f7f7;
+  font-weight: 400;
+  box-shadow: 0px 0px 1px #f0f0f0;
+}
+
+.cb-container {
+  display: grid;
+  grid-template-areas:
+  'pair pair'
+  'trio0 trio1'
+  'trio2 trio3'
+  'trio4 trio5'
+  'trio6 trio7'
+  'trio8 trio9';
+  width: min-content;
+}
+
+
 /* Main elements end */
 
 
@@ -40,3 +83,4 @@ a {
  ****************************************************************************/
 
 /* Various other styles end */
+
