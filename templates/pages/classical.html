@@ -1,0 +1,20 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Classical{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>Classical Mode</h1>
+</div>
+<p class="lead">Here, you can generate a random game, or input an existing order of dominoes.</p>
+{{ classicalBoard }}
+
+<div class="cb-container">
+  {% for i in range(10) %}
+    <div class="trio">
+    {% for j in range(3) %}
+      <div class="domino"></div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
