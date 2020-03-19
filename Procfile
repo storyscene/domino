@@ -1,1 +1,1 @@
-web: venv/bin/gunicorn app:app --log-file=-
+web: ./venv/bin/gunicorn app:app --log-file=-
