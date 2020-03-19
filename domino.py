@@ -236,6 +236,11 @@ class classicalBoard:
         s += "\n" + str(self.double[0][1]) + "\t" + str(self.double[1][1]) + "\n" + str(self.double[0][2]) + "\t" + str(self.double[1][2])
         return s
 
+    def succinct(self):
+        result = []
+        for i in self.tripletlist:
+            s += lodominoes[i][0]
+
     def updateRaw(self):
         '''uses tripletlist and double, updates everything else'''
         self.raw = self.tripletlist + self.double
