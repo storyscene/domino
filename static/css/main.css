@@ -117,6 +117,13 @@ a {
   margin-left:6px;
 }
 
+
+
+.big-container {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
 .cb-container {
   display: grid;
   grid-template-areas:
@@ -127,7 +134,8 @@ a {
   'trio6 trio7'
   'trio8 trio9';
   width: min-content;
-  margin: 0 -24px;
+  padding: 0 -24px;
+  margin: 0 24px 0 -24px;
 }
 
 button {
@@ -171,6 +179,19 @@ input {
   border-bottom: 2px solid #555;
   padding: 8px;
   margin: 8px 8px 8px 0;
+}
+
+pre {
+  display: none;
+  padding: 8px;
+  margin: 16px 0 10px;
+  font-size: 10px;
+  line-height: 1;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #333;
+  background-color: none;
+  border: none;
 }
 
 :focus { outline: none; }
