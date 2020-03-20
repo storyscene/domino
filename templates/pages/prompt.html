@@ -1,0 +1,37 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Classical{% endblock %}
+<link type="text/css" rel="stylesheet" href="/static/css/main.css" />
+
+{% block content %}
+
+<script>
+function onStartInput() {
+  x = document.getElementById("inputContainer");
+  x.style.display = "inline-block";
+  y = document.getElementById("inputPrompt")
+  z = document.getElementById("randomGamePrompt")
+  y.style.display = "none";
+  z.style.display = "none";
+}
+function onSubmitInput() {
+  x = document.getElementById("inputBox");
+  window.location.href = "/classical?setup="+x.value;
+}
+
+</script>
+
+<div class="page-header">
+  <h1>Classical Mode</h1>
+</div>
+<p class = "lead">Start a new game!<br></br> You can either input a game you are working on, or get a new random game!</p>
+<div style = "display:flex; flex-direction: column; justify-content: space-between;">
+<div>
+  <button onclick="onStartInput()" id = "inputPrompt">Input Your Own Game</button>
+  <a href="{{ url_for('randomgame') }}" style = "width: min(30%, 200px);" class = "fakeButton" id = "randomGamePrompt">Random Game</a>
+</div>
+  <div style = "display:none;" id = "inputContainer" >
+    <input type="text" style = "width: min(80%, 800px);" id = "inputBox"></input>
+    <button onclick="onSubmitInput()" class = "fakeButton">Submit</button>
+  </div>
+</div>
+{% endblock %}

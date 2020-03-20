@@ -4,20 +4,94 @@
 
 {% block content %}
 
+<script>
+function onStartInput() {
+  x = document.getElementById("inputContainer");
+  x.style.display = "inline-block";
+  y = document.getElementById("inputPrompt")
+  z = document.getElementById("randomGamePrompt")
+  y.style.display = "none";
+  z.style.display = "none";
+}
+function onSubmitInput() {
+  x = document.getElementById("inputBox");
+  window.location.href = "/classical?setup="+x.value;
+}
+
+</script>
+
 <div class="page-header">
   <h1>Classical Mode</h1>
 </div>
-<p class="lead">Here, you can generate a random game, or input an existing order of dominoes.</p>
-
-<div class="cb-container">
+<div class="cb-container" id = "cb-container">
   <div class="pair">
-    <div class="domino"><div>{{ classicalBoard.raw[10][1] }}</div><div>{{ classicalBoard.raw[10][2] }}</div></div>
-    <div class="domino"><div>{{ classicalBoard.raw[11][1] }}</div><div>{{ classicalBoard.raw[11][2] }}</div></div>
+      <div class="domino">
+        {% if classicalBoard.dummyFont[60] == "k"%}
+          <div class = "domone">{{ classicalBoard.dummyFont[60] }}</div>
+        {% elif classicalBoard.dummyFont[60] == "n"%}
+          <div class = "domfour">{{ classicalBoard.dummyFont[60] }}</div>
+        {% elif classicalBoard.dummyFont[60] == "l"%}
+          <div class = "domtwo">{{ classicalBoard.dummyFont[60] }}</div>
+        {% else %}
+          <div class = "domspacy">{{ classicalBoard.dummyFont[60] }}</div>
+        {% endif %}
+        
+        {% if classicalBoard.dummyFont[61] == "k"%}
+          <div class = "domone">{{ classicalBoard.dummyFont[61] }}</div>
+        {% elif classicalBoard.dummyFont[61] == "n"%}
+          <div class = "domfour">{{ classicalBoard.dummyFont[61] }}</div>
+        {% elif classicalBoard.dummyFont[61] == "l"%}
+          <div class = "domtwo">{{ classicalBoard.dummyFont[61] }}</div>
+        {% else %}
+          <div class = "domspacy">{{ classicalBoard.dummyFont[61] }}</div>
+        {% endif %}</div>
+      <div class="domino" id="domino">
+        {% if classicalBoard.dummyFont[62] == "k"%}
+          <div class = "domone">{{ classicalBoard.dummyFont[62] }}</div>
+        {% elif classicalBoard.dummyFont[62] == "n"%}
+          <div class = "domfour">{{ classicalBoard.dummyFont[62] }}</div>
+        {% elif classicalBoard.dummyFont[62] == "l"%}
+          <div class = "domtwo">{{ classicalBoard.dummyFont[62] }}</div>
+        {% else %}
+          <div class = "domspacy">{{ classicalBoard.dummyFont[62] }}</div>
+        {% endif %}
+        
+        {% if classicalBoard.dummyFont[63] == "k"%}
+          <div class = "domone">{{ classicalBoard.dummyFont[63] }}</div>
+        {% elif classicalBoard.dummyFont[63] == "n"%}
+          <div class = "domfour">{{ classicalBoard.dummyFont[63] }}</div>
+        {% elif classicalBoard.dummyFont[63] == "l"%}
+          <div class = "domtwo">{{ classicalBoard.dummyFont[63] }}</div>
+        {% else %}
+          <div class = "domspacy">{{ classicalBoard.dummyFont[63] }}</div>
+        {% endif %}
+        </div>
   </div>
   {% for i in range(10) %}
       <div class="trio">
       {% for j in range(3) %}
-        <div class="domino"><div>{{ classicalBoard.raw[i].details[j][1] }}</div><div>{{ classicalBoard.raw[i].details[j][2] }}</div></div>
+        <div class="domino">
+
+            {% if classicalBoard.dummyFont[i*6+j*2] == "k"%}
+              <div class = "domone">{{ classicalBoard.dummyFont[i*6+j*2] }}</div>
+            {% elif classicalBoard.dummyFont[i*6+j*2] == "n"%}
+              <div class = "domfour">{{ classicalBoard.dummyFont[i*6+j*2] }}</div>
+            {% elif classicalBoard.dummyFont[i*6+j*2] == "l"%}
+              <div class = "domtwo">{{ classicalBoard.dummyFont[i*6+j*2] }}</div>
+            {% else %}
+              <div class = "domspacy">{{ classicalBoard.dummyFont[i*6+j*2] }}</div>
+            {% endif %}
+
+            {% if classicalBoard.dummyFont[i*6+j*2+1] == "k"%}
+              <div class = "domone">{{ classicalBoard.dummyFont[i*6+j*2+1] }}</div>
+            {% elif classicalBoard.dummyFont[i*6+j*2+1] == "n"%}
+              <div class = "domfour">{{ classicalBoard.dummyFont[i*6+j*2+1] }}</div>
+            {% elif classicalBoard.dummyFont[i*6+j*2+1] == "l"%}
+              <div class = "domtwo">{{ classicalBoard.dummyFont[i*6+j*2+1] }}</div>
+            {% else %}
+              <div class = "domspacy">{{ classicalBoard.dummyFont[i*6+j*2+1] }}</div>
+            {% endif %}
+        </div>
       {% endfor %}
     </div>
   {% endfor %}

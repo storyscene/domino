@@ -4,7 +4,10 @@
  * Main stylesheet file.
  */
 
-
+ @font-face {
+  font-family: "Dicey";
+  src: url("fonts/Dicey.ttf") format("ttf");
+}
 /*****************************************************************************
  * Main elements
  ****************************************************************************/
@@ -13,7 +16,7 @@ html {
 }
 body {
   font-family: Montserrat, sans-serif;
-  font-size: small;
+  font-size: medium;
 }
 a {
   cursor: pointer;
@@ -36,7 +39,7 @@ a {
 .trio {
   display: flex;
   width: min-content;
-  margin: 8px 8px;
+  margin: 8px 16px;
 }
 
 .pair {
@@ -48,18 +51,34 @@ a {
 }
 
 .domino {
+  font-family: Dicey, sans-serif;
+  font-size: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 60px;
-  width: 24px;
-  padding: 8px;
+  height: 100px;
+  width: 50px;
+  padding: 6px 8px 10px 8px;
   margin: 0 2px;
   align-content: center;
   text-align: center;
-  background-color: #f7f7f7;
+  background-color: #fff;
   font-weight: 400;
-  box-shadow: 0px 0px 1px #f0f0f0;
+  box-shadow: 0px 0px 3px #ccc;
+  border-radius: 3px;
+}
+
+.domone {
+  color: rgb(168, 29, 29);
+}
+
+.domfour {
+  color: rgb(168, 29, 29);
+  margin-left:6px;
+}
+
+.domspacy {
+  margin-left:6px;
 }
 
 .cb-container {
@@ -73,6 +92,52 @@ a {
   'trio8 trio9';
   width: min-content;
 }
+
+button {
+  background-color: #f3f3f3;
+  background-image: none;
+  border:none;
+  border-bottom: 2px solid #555;
+  padding: 8px 20px;
+  margin: 8px 8px 8px 0;
+}
+
+button:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.fakeButton {
+  background-color: #f3f3f3;
+  background-image: none;
+  border:none;
+
+  border-bottom: 2px solid #555;
+  color: #333;
+  padding: 8px 20px;
+  margin: 8px 8px 8px 0;
+}
+
+.fakeButton:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+input {
+  background-color: #f3f3f3;
+  background-image: none;
+  border:none;
+  border-bottom: 2px solid #555;
+  padding: 8px;
+  margin: 8px 8px 8px 0;
+}
+
+:focus { outline: none; }
 
 
 /* Main elements end */
