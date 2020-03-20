@@ -203,16 +203,26 @@ class triplet:
         self.details[loc] = lodominoes[newindex]
 
 class classicalBoard:
-    def __init__(self, loDominoes, fLod, loTrios):
-        self.flod = fLod
-        self.lodominoes = loDominoes
-        self.lotrios = loTrios
-        #self.order is not always updated, in particular it is not under manual input
-        self.raw = self.generateTripleList()
-        self.tripletlist = self.raw[:10]
-        self.double = self.raw[10:]
-        self.indicesraw = []
-        self.updateRaw()
+
+    def __init__(self, loDominoes, fLod, loTrios, knownRaw = None):
+        if knownRaw == None:
+            self.flod = fLod
+            self.lodominoes = loDominoes
+            self.lotrios = loTrios
+            #self.order is not always updated, in particular it is not under manual input
+            self.raw = self.generateTripleList()
+            self.tripletlist = self.raw[:10]
+            self.double = self.raw[10:]
+            self.indicesraw = []
+            self.updateRaw()
+        else:
+            self.flod = fLod
+            self.lodominoes = loDominoes
+            self.lotrios = loTrios
+            #self.order is not always updated, in particular it is not under manual input
+            self.indicesraw = rawvaluestoindices(knownRaw)
+            self.updateTripletList()
+            self.updateRaw()
     
     def __repr__(self):
         s = ""
@@ -249,6 +259,7 @@ class classicalBoard:
             ir += x.getIndices()
         ir += [self.double[0][0], self.double[1][0]]
         self.indicesraw = ir
+        self.dummyFontConvert()
 
     def updateTripletList(self):
         '''uses indicesraw, updates everything else'''
@@ -259,6 +270,7 @@ class classicalBoard:
         self.raw = result
         self.tripletlist = self.raw[:10]
         self.double = self.raw[10:]
+        self.dummyFontConvert()
 
 
     def generateTripleList(self, input = None):
@@ -327,6 +339,47 @@ class classicalBoard:
             result += [11]
         return result
 
+    def dummyFontConvert(self):
+        result = ""
+        for ent in self.raw[:10]:
+            for dom in ent.details:
+                for j in dom[1:3]:
+                    if j == 1 or j == "1":
+                        result += "k"
+                    elif j == 2 or j == "2":
+                        result += "l"
+                    elif j == 3 or j == "3":
+                        result += "m"
+                    elif j == 4 or j == "4":
+                        result += "n"
+                    elif j == 5 or j == "5":
+                        result += "o"
+                    elif j == 6 or j == "6":
+                        result += "p"
+                    else:
+                        result += "A"
+        for ent in self.raw[10:]:
+            for j in ent[1:3]:
+                if j == 1 or j == "1":
+                    result += "k"
+                elif j == 2 or j == "2":
+                    result += "l"
+                elif j == 3 or j == "3":
+                    result += "m"
+                elif j == 4 or j == "4":
+                    result += "n"
+                elif j == 5 or j == "5":
+                    result += "o"
+                elif j == 6 or j == "6":
+                    result += "p"
+                else:
+                    result += "A"
+        self.dummyFont = result
+        #return result
+    def setFromRawInput(self, rawInput):
+        raw = rawvaluestoindices(rawInput)
+        self.updateTripletList(raw)
+        print("done")
 '''
 def findSolution(cb, previndexstates, alreadyValid):
     recursively, start with self.findSolution([],[])
@@ -555,14 +608,15 @@ def indexCalculator(valone, valtwo):
     result += valtwo - valone
     return result
 
+
 '''cb = classicalBoard(lodominoes, flod, lotrios)
 cb.manualUpdate([4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1])
-'''
+
 
 '''
 raw = [4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1]
 raw = rawvaluestoindices(raw)
-
+'''
 raw = [0,0,1,2,2,3,4,4,5,5,6,6,7,8,9,10,11,11,12,13,14,15,15,16,17,17,18,18,19,19,20,20]
 shuffle(raw)
 #indicesRecur(raw, [], [], lotrios, lopairs, lodominoes, 0)
@@ -575,6 +629,6 @@ for i in range(10):
     #results += [bfs(raw,lotrios,lopairs,lodominoes,30,5,3)]
     results += [[l2, l3]]
 print(results)
-
-couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
 '''
+couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
+
