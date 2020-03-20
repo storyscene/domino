@@ -15,15 +15,21 @@ function onStartInput() {
 }
 function onSubmitInput() {
   x = document.getElementById("inputBox");
-  window.location.href = "/classical?setup="+x.value;
+  result = x.value.replace(/\s/g, '');
+  console.log(result)
+  window.location.href = "/classical?setup="+result;
 }
 var hintsDisplayed = 0
 function onHint() {
-  hintsDisplayed++
+  hintsDisplayed++;
   for (i = 0; i < hintsDisplayed; i++) {
     x = document.getElementById("hint"+i.toString())
     x.style.display = "block";
   }
+}
+
+function swap(newboard) {
+  window.location.href = "/classical?setup="+newboard;
 }
 
 </script>
@@ -105,14 +111,19 @@ function onHint() {
       </div>
     {% endfor %}
   </div>
-  <div>
+  <div style = "margin-left: 64px;">
     <div> A solution was found with {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 200) }} steps  :)
+    <button onclick="onHint()" id = "reveal-hint">Hint</button>
     </div>
-    <button onclick="onHint()">Reveal Hint</button>
+    Click on a revealed step to skip to that step.
+    <p style = "font-weight: 300; line-height: 1.7; font-size: 14px; margin-top: -8px;"><br>*If clicking hint doesn't show anything, it means we didn't find a solution under 30 steps. Feel free to try the puzzle anyway though!<br></p>
     <div class = "hints">
-      {% for i in range(10)  %}
+      {% for i in range(20)  %}
         {% if classicalBoard.printableSolution|length > i %}
-          <pre id = {{ "hint" + i|string}}><code>{{ classicalBoard.printableSolution[i] }}</pre></code>
+            <div style= "display:none;"> {{ classicalBoard.swapRaw(classicalBoard.printableSolution[i][1], classicalBoard.printableSolution[i][2]) }}</div>
+            <a href = {{"/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;">
+            <pre><code>{{ classicalBoard.printableSolution[i][0] }}</pre></code>
+            </a>
         {% endif %}
       {% endfor %}
     </div>

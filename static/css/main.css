@@ -136,6 +136,7 @@ a {
   width: min-content;
   padding: 0 -24px;
   margin: 0 24px 0 -24px;
+  height:min-content;
 }
 
 button {
@@ -160,6 +161,8 @@ button:hover {
   color: #333;
   padding: 8px 20px;
   margin: 8px 24px 8px 0;
+  height:min-content;
+  vertical-align: middle;
 }
 
 .fakeButton:hover {
@@ -182,9 +185,9 @@ input {
 }
 
 pre {
-  display: none;
-  padding: 8px;
-  margin: 16px 0 10px;
+  display: block;
+  padding: 8px 16px;
+  margin: 16px 0 -16px;
   font-size: 10px;
   line-height: 1;
   word-break: break-all;
@@ -192,9 +195,36 @@ pre {
   color: #333;
   background-color: none;
   border: none;
+  border-left: 2px solid #555;
+  border-radius: 0;
+}
+
+.hintContainer {
+  margin: 0 20px 0 0;
+  flex-direction: row;
+  justify-content: space-between;
+  width: min(400px, 100%);
+}
+
+#reveal-hint{
+  margin-left: 16px;
+  border:none;
+  background-color: #f3f3f3 !important;
+  font-size: 16px;
+  color: rgb(114, 67, 67);
+  padding: 4px 8px;
+}
+
+#reveal-hint:hover {
+  color: rgb(61, 28, 28);
+  background-color: #f3f3f3 !important;
 }
 
 :focus { outline: none; }
+a:focus {
+  color: #333;
+  text-decoration: none;
+}
 
 
 /* Main elements end */
