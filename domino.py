@@ -382,6 +382,20 @@ class classicalBoard:
         self.updateTripletList(raw)
         print("done")
 
+    def swapRaw(self, i, j):
+        temp = self.indicesraw[j]
+        self.indicesraw[j] = self.indicesraw[i]
+        self.indicesraw[i] = temp
+        self.updateTripletList()
+        return self.raw
+    
+    def getActualRaw(self):
+        values = ""
+        for i in range(32):
+            values += str(lodominoes[self.indicesraw[i]][1])
+            values += str(lodominoes[self.indicesraw[i]][2])
+        return values
+
 
     def couponCollector(self, startState, lotrios, lopairs, lodominoes, BOUND):
         prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
@@ -432,7 +446,7 @@ class classicalBoard:
                 prevStateHistories = deepcopy(newStateHistories)
             print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
             print(level, "is done.")
-        return 40
+        return 30
 
 def formatPrintableSol(aListOfIndices):
     result = []
@@ -440,7 +454,8 @@ def formatPrintableSol(aListOfIndices):
         swapped = helperCompareOneChange(aListOfIndices[i], aListOfIndices[i-1])
         dom1 = lodominoes[aListOfIndices[i-1][swapped[0]]]
         dom2 = lodominoes[aListOfIndices[i-1][swapped[1]]]
-        result += ["Swap ("+ str(dom1[1]) + ", " + str(dom1[2]) + ") at " + helperConvertToReadableCoordinate(swapped[0]) + "\n\n and (" + str(dom2[1]) + ", " + str(dom2[2]) + ") at " + helperConvertToReadableCoordinate(swapped[1])+"."]
+        result += [["Swap ("+ str(dom1[1]) + ", " + str(dom1[2]) + ") at " + helperConvertToReadableCoordinate(swapped[0]) + "\n\n and (" + str(dom2[1]) + ", " + str(dom2[2]) + ") at " + helperConvertToReadableCoordinate(swapped[1])+".", swapped[0], swapped[1]]]
+    print(result)
     return result
 
 def helperCompareOneChange(l1, l2):
@@ -683,6 +698,7 @@ def rawvaluestoindices(rawvals):
     for i in range(32):
         indices += [indexCalculator(int(rawvals[i*2]), int(rawvals[i*2+1]))]
     return indices
+
 
 def indexCalculator(valone, valtwo):
     if valtwo < valone:
