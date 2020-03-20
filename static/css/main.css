@@ -6,8 +6,10 @@
 
  @font-face {
   font-family: "Dicey";
-  src: url("fonts/Dicey.ttf") format("ttf");
+  src: url("../fonts/Dicey.ttf") format("ttf");
 }
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
 /*****************************************************************************
  * Main elements
  ****************************************************************************/
