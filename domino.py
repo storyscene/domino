@@ -215,6 +215,7 @@ class classicalBoard:
             self.double = self.raw[10:]
             self.indicesraw = []
             self.updateRaw()
+            self.printableSolution = []
         else:
             self.flod = fLod
             self.lodominoes = loDominoes
@@ -380,6 +381,92 @@ class classicalBoard:
         raw = rawvaluestoindices(rawInput)
         self.updateTripletList(raw)
         print("done")
+
+
+    def couponCollector(self, startState, lotrios, lopairs, lodominoes, BOUND):
+        prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
+        targetValidCount = len(validFromRaw(startState, lotrios, lopairs))+1
+        print("VALID FROM RAW", targetValidCount-1)
+        print(prevStateHistories)
+        #alreadyValid = validFromRaw(startState)
+        level = 0
+        validCount = len(validFromRaw(startState, lotrios, lopairs))
+        print(validCount)
+        if validCount == 11:
+            print("DONE DONE DONE", level)
+            return level
+        while level<30:
+            level += 1
+            #targetValidCount += 1
+            newStateHistories = []
+            found = False
+            for vertex in prevStateHistories:
+                for possibility in movableFromRaw(vertex[1][-1], lotrios, lopairs):
+                    if not found:
+                        changingState = deepcopy(vertex[1][-1])
+                        localVertex = deepcopy(vertex)
+                        swapRaw(changingState, possibility)
+                        if changingState not in localVertex[1]:
+                            validCount = len(validFromRaw(changingState, lotrios, lopairs))
+                            if validCount == 11:
+                                print("DONE DONE DONE", level)
+                                print(localVertex[1] + [changingState])
+                                self.printableSolution = formatPrintableSol(localVertex[1] + [changingState])
+                                return level
+                            if validCount >= targetValidCount:
+                                targetValidCount = validCount + 1
+                                print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
+                                if targetValidCount == 11:
+                                    print(changingState)
+                                found = True
+                    if not found:
+                        newStateHistories += [[11-validCount, localVertex[1] + [changingState]]]
+                    else:
+                        newStateHistories = [[11-validCount, localVertex[1] + [changingState]]]
+                        prevStateHistories = deepcopy(newStateHistories)
+            if len(newStateHistories) > BOUND:
+                prevStateHistories = deepcopy(newStateHistories)
+                shuffle(prevStateHistories)
+                prevStateHistories = prevStateHistories[:BOUND]
+            else:
+                prevStateHistories = deepcopy(newStateHistories)
+            print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
+            print(level, "is done.")
+        return 40
+
+def formatPrintableSol(aListOfIndices):
+    result = []
+    for i in range(1, len(aListOfIndices)):
+        swapped = helperCompareOneChange(aListOfIndices[i], aListOfIndices[i-1])
+        dom1 = lodominoes[aListOfIndices[i-1][swapped[0]]]
+        dom2 = lodominoes[aListOfIndices[i-1][swapped[1]]]
+        result += ["Swap ("+ str(dom1[1]) + ", " + str(dom1[2]) + ") at " + helperConvertToReadableCoordinate(swapped[0]) + "\n\n and (" + str(dom2[1]) + ", " + str(dom2[2]) + ") at " + helperConvertToReadableCoordinate(swapped[1])+"."]
+    return result
+
+def helperCompareOneChange(l1, l2):
+    result = []
+    if (len(l1)!=len(l2)):
+        print(" ---------------- WE THINK YOU MESSED UP AGAIN ---------------- ")
+        print(" ------------- HOW DOES IT FEEL TO ALWAYS BE WRONG ------------- ")
+    else:
+        for i in range(len(l1)):
+            if (l1[i] != l2[i]):
+                result += [i]
+    if len(result)!= 2:
+        print(" ---------------- WE THINK YOU MESSED UP AGAIN ---------------- ")
+        print(" ------------- HOW DOES IT FEEL TO ALWAYS BE WRONG ------------- ")
+    print(result)
+    return result
+
+def helperConvertToReadableCoordinate(num):
+    if num < 30:
+        return "R"+ str((num // 6 + 1)) + " C" + str(num % 6 + 1)
+    else:
+        if num == 30:
+            return "pair 1"
+        else:
+            return "pair 2"
+
 '''
 def findSolution(cb, previndexstates, alreadyValid):
     recursively, start with self.findSolution([],[])
@@ -562,7 +649,6 @@ def couponCollector(startState, lotrios, lopairs, lodominoes, BOUND):
         print(level, "is done.")
     return 40
 
-
 def helperexistsalready(indraw, previndexstates):
     for indstate in previndexstates:
         if sortIndices(indraw) == sortIndices(indstate):
@@ -609,12 +695,16 @@ def indexCalculator(valone, valtwo):
     return result
 
 
-'''cb = classicalBoard(lodominoes, flod, lotrios)
+'''
 cb.manualUpdate([4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1])
 
 
 '''
-raw = [4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1]
+cb = classicalBoard(lodominoes, flod, lotrios)
+
+raw = "4446352223561516145646443336456622166613112624255534331315551211" 
+
+#[4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1]
 raw = rawvaluestoindices(raw)
 '''
 raw = [0,0,1,2,2,3,4,4,5,5,6,6,7,8,9,10,11,11,12,13,14,15,15,16,17,17,18,18,19,19,20,20]
@@ -630,5 +720,5 @@ for i in range(10):
     results += [[l2, l3]]
 print(results)
 '''
-couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
+cb.couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
 
