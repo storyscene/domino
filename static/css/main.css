@@ -6,10 +6,20 @@
 
  @font-face {
   font-family: "Dicey";
-  src: url("../fonts/Dicey.ttf") format("ttf");
+  src: url("../fonts/Dicey.ttf") format("truetype");
 }
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
 /*****************************************************************************
  * Main elements
  ****************************************************************************/
@@ -17,7 +27,7 @@ html {
   overflow-y: scroll;
 }
 body {
-  font-family: Montserrat, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: medium;
 }
 a {
@@ -53,7 +63,7 @@ a {
 }
 
 .domino {
-  font-family: Dicey, sans-serif;
+  font-family: "Dicey", sans-serif;
   font-size: 30px;
   display: flex;
   flex-direction: column;

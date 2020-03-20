@@ -32,6 +32,28 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+h1 {
+  font-size: 32px;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.navbar {
+  box-shadow: none;
+  background-color: none;
+  background-image: none;
+}
+
+.navbar .active a {
+  box-shadow: none !important;
+  background-color: #ccc;
+  background-image: none !important;
+}
+
 #wrap > .container {
   padding: 60px 15px 0;
 }
