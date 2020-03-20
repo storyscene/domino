@@ -46,11 +46,18 @@ h1 {
   box-shadow: none;
   background-color: none;
   background-image: none;
+  height: min-content;
+  font-size: small;
 }
 
 .navbar .active a {
   box-shadow: none !important;
   background-color: #ccc;
+  background-image: none !important;
+}
+.navbar-default {
+  box-shadow: none !important;
+  background-color: #fbfbfb;
   background-image: none !important;
 }
 

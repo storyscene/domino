@@ -48,6 +48,29 @@ a {
 
 /* dominoes */
 
+@media (max-width: 500px) {
+  .select-mode {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: min(90%, 400px);
+  }
+  .select-mode .fakeButton {
+    text-align: left;
+  }
+  .select-mode button {
+    text-align: left;
+  }
+}
+
+.big-input-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
 .trio {
   display: flex;
   width: min-content;
@@ -67,8 +90,8 @@ a {
   font-size: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100px;
+  justify-content: center;
+  height: 80px;
   width: 50px;
   padding: 6px 8px 10px 8px;
   margin: 0 2px;
@@ -78,6 +101,7 @@ a {
   font-weight: 400;
   box-shadow: 0px 0px 3px #ccc;
   border-radius: 3px;
+  line-height: 1;
 }
 
 .domone {
@@ -103,6 +127,7 @@ a {
   'trio6 trio7'
   'trio8 trio9';
   width: min-content;
+  margin: 0 -24px;
 }
 
 button {
@@ -111,7 +136,7 @@ button {
   border:none;
   border-bottom: 2px solid #555;
   padding: 8px 20px;
-  margin: 8px 8px 8px 0;
+  margin: 8px 24px 8px 0;
 }
 
 button:hover {
@@ -123,11 +148,10 @@ button:hover {
   background-color: #f3f3f3;
   background-image: none;
   border:none;
-
   border-bottom: 2px solid #555;
   color: #333;
   padding: 8px 20px;
-  margin: 8px 8px 8px 0;
+  margin: 8px 24px 8px 0;
 }
 
 .fakeButton:hover {
