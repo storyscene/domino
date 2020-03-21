@@ -94,7 +94,6 @@ function swap(newboard) {
       {% endif %}
         {% for j in range(3) %}
           <div class="domino">
-
               {% if classicalBoard.dummyFont[i*6+j*2] == "k"%}
                 <div class = "domone">{{ classicalBoard.dummyFont[i*6+j*2] }}</div>
               {% elif classicalBoard.dummyFont[i*6+j*2] == "n"%}
@@ -119,7 +118,7 @@ function swap(newboard) {
       </div>
     {% endfor %}
   </div>
-  <div style = "margin-left: 64px;">
+  <div class = "bigHintContainer">
     <div> A solution was {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }}
     <button onclick="onHint()" id = "reveal-hint" class = "inlineHintButton">Hint</button>
     </div>
