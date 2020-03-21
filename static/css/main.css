@@ -53,7 +53,7 @@ a {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-    width: min(90%, 400px);
+    width: min(90%, 280px);
   }
   .select-mode .fakeButton {
     text-align: left;
@@ -61,56 +61,143 @@ a {
   .select-mode button {
     text-align: left;
   }
+
+  .bigHintContainer {
+    margin:0;
+    margin-top:calc(50vh - 280px);
+    justify-content: center;
+  }
+
+  .hideOnPhone {
+    display: none;
+  }
+
+  .big-input-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .trio {
+    display: flex;
+    width: min-content;
+    padding: 12px 12px;
+    border-radius: 1px;
+  }
+  
+  .pair {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 12px;
+    grid-area: pair;
+  }
+  
+  .domino {
+    font-family: "Dicey", sans-serif;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 64px;
+    width: 40px;
+    padding: 4.8px 4.8px 8px 6.4px;
+    margin: 0 2px;
+    align-content: center;
+    text-align: center;
+    background-color: #fff;
+    font-weight: 400;
+    box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
+    border-radius: 3px;
+    line-height: 1;
+  
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+  
+  }
+  
+  .domone {
+    color: rgb(168, 29, 29);
+  }
+  
+  .domfour {
+    color: rgb(168, 29, 29);
+    margin-left:6px;
+  }
+  
+  .domspacy {
+    margin-left:6px;
+  }
+  
+  
+  .big-container {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    margin-top: calc(50vh - 314px);
+  }
+  
+  
+
 }
-
-.big-input-container {
-  display:flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+@media(min-width: 500px) {
 
 
+  .bigHintContainer {
+    margin-left:64px;
+  }
 
-.trio {
-  display: flex;
-  width: min-content;
-  padding: 12px 12px;
-  border-radius: 1px;
-}
+  .big-input-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-.pair {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  padding: 12px 12px;
-  grid-area: pair;
-}
+  .trio {
+    display: flex;
+    width: min-content;
+    padding: 12px 12px;
+    border-radius: 1px;
+  }
 
-.domino {
-  font-family: "Dicey", sans-serif;
-  font-size: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 80px;
-  width: 50px;
-  padding: 6px 8px 10px 8px;
-  margin: 0 2px;
-  align-content: center;
-  text-align: center;
-  background-color: #fff;
-  font-weight: 400;
-  box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
-  border-radius: 3px;
-  line-height: 1;
+  .pair {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 12px;
+    grid-area: pair;
+  }
 
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-     -moz-user-select: none; /* Old versions of Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
-          user-select: none; /* Non-prefixed version, currently
-                                supported by Chrome, Opera and Firefox */
+  .domino {
+    font-family: "Dicey", sans-serif;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80px;
+    width: 50px;
+    padding: 6px 8px 10px 8px;
+    margin: 0 2px;
+    align-content: center;
+    text-align: center;
+    background-color: #fff;
+    font-weight: 400;
+    box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
+    border-radius: 3px;
+    line-height: 1;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 
 }
 
@@ -127,6 +214,15 @@ a {
   margin-left:6px;
 }
 
+
+.big-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: left;
+}
+
+
+}
 .valid {
   background-color: #f1f1f1;
 }
@@ -143,13 +239,6 @@ a {
 
 
 
-.big-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: left;
-  
-}
-
 .cb-container {
   display: grid;
   grid-template-areas:
@@ -160,8 +249,8 @@ a {
   'trio6 trio7'
   'trio8 trio9';
   width: min-content;
-  padding: 0 -24px;
-  margin: 0 24px 0 -24px;
+  padding: 0;
+  margin: 0;
   height:min-content;
 }
 
