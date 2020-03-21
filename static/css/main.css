@@ -64,7 +64,7 @@ a {
 
   .bigHintContainer {
     margin:0;
-    margin-top:calc(100vh - 588px);
+    margin-top:calc(100vh - 570px);
     justify-content: center;
   }
 
@@ -95,13 +95,13 @@ a {
   
   .domino {
     font-family: "Dicey", sans-serif;
-    font-size: 24px;
+    font-size: 27px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 64px;
-    width: 40px;
-    padding: 4.8px 4.8px 8px 6.4px;
+    height: 72px;
+    width: 45px;
+    padding: 5.4px 5.4px 9px 7.2px;
     margin: 0 2px;
     align-content: center;
     text-align: center;
