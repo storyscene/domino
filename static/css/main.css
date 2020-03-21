@@ -74,14 +74,15 @@ a {
 .trio {
   display: flex;
   width: min-content;
-  margin: 8px 16px;
+  padding: 12px 12px;
+  border-radius: 1px;
 }
 
 .pair {
   display: flex;
-  width: min-content;
-  justify-self: center;
-  margin: 8px 8px;
+  width: 100%;
+  justify-content: center;
+  padding: 12px 12px;
   grid-area: pair;
 }
 
@@ -99,7 +100,7 @@ a {
   text-align: center;
   background-color: #fff;
   font-weight: 400;
-  box-shadow: 0px 0px 3px #ccc;
+  box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
   border-radius: 3px;
   line-height: 1;
 }
@@ -117,11 +118,27 @@ a {
   margin-left:6px;
 }
 
+.valid {
+  background-color: #f1f1f1;
+}
+
+.hightlighted .domino {
+  background-color: #2e2e2e;
+  box-shadow: 2px 2px 4px rgba(0,0,0, 0.5);
+  color: #eee;
+}
+
+.hightlighted .domone, .hightlighted .domfour {
+  color: rgb(211, 58, 58);
+}
+
 
 
 .big-container {
   display: grid;
   grid-template-columns: auto auto;
+  justify-content: left;
+  
 }
 
 .cb-container {
@@ -193,10 +210,15 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   color: #333;
-  background-color: none;
+  background-color: #f3f3f3;
   border: none;
-  border-left: 2px solid #555;
+  border-left: 0px solid #555;
   border-radius: 0;
+}
+
+pre:hover {
+  color: #fff;
+  background-color: #555;
 }
 
 .hintContainer {
@@ -206,18 +228,29 @@ pre {
   width: min(400px, 100%);
 }
 
-#reveal-hint{
-  margin-left: 16px;
-  border:none;
-  background-color: #f3f3f3 !important;
-  font-size: 16px;
-  color: rgb(114, 67, 67);
+.solutionButtons{
+  font-size: 14px;
+  margin-right: 16px;
+  color: rgb(31, 31, 31);
+  border-bottom: 1px solid;
+  background-color: #fdfdfd;
   padding: 4px 8px;
 }
 
-#reveal-hint:hover {
-  color: rgb(61, 28, 28);
-  background-color: #f3f3f3 !important;
+.inlineHintButton {
+  font-size: 14px;
+  margin-left: 16px;
+  color: rgb(31, 31, 31);
+  border-bottom: none;
+  background-color: #f3f3f3;
+  padding: 4px 8px;
+}
+
+
+#possibilities {
+  margin-top: 4px;
+  font-size: small;
+  font-weight: 300;
 }
 
 :focus { outline: none; }
@@ -225,6 +258,11 @@ a:focus {
   color: #333;
   text-decoration: none;
 }
+
+a {
+  color: #8d0e0e;
+}
+
 
 
 /* Main elements end */

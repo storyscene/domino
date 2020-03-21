@@ -394,7 +394,8 @@ class classicalBoard:
         for i in range(32):
             values += str(lodominoes[self.indicesraw[i]][1])
             values += str(lodominoes[self.indicesraw[i]][2])
-        return values
+        print(values)
+        return str(values)
 
 
     def couponCollector(self, startState, lotrios, lopairs, lodominoes, BOUND):
@@ -447,6 +448,28 @@ class classicalBoard:
             print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
             print(level, "is done.")
         return 30
+    
+    def movableFromRaw(self, raw, lotrios, lopairs):
+        possible = []
+        for i in range(10):
+            for j in range(i+1,10):
+                r = swappableIndices(raw[i*3:i*3+3], raw[j*3:j*3+3], lotrios, lopairs)
+                if len(r)>0:
+                    for k in range(len(r)//2):
+                        possible += [[i, r[k*2], j, r[k*2+1]]]
+            r = swappableIndices(raw[i*3:i*3+3], raw[-2:], lotrios, lopairs)
+            if len(r)>0:
+                for k in range(len(r)//2):
+                    possible += [[i, r[k*2], 10, r[k*2+1]]]
+        return possible
+
+    def isGoodPair(self,indone, indtwo):
+        if indone == indtwo:
+            return True
+        tbc = sorted([indone, indtwo])
+        if tbc in ([1,8], [3,7], [9,12], [10,13], [14,16]):
+            return True
+        return False
 
 def formatPrintableSol(aListOfIndices):
     result = []
@@ -454,7 +477,7 @@ def formatPrintableSol(aListOfIndices):
         swapped = helperCompareOneChange(aListOfIndices[i], aListOfIndices[i-1])
         dom1 = lodominoes[aListOfIndices[i-1][swapped[0]]]
         dom2 = lodominoes[aListOfIndices[i-1][swapped[1]]]
-        result += [["Swap ("+ str(dom1[1]) + ", " + str(dom1[2]) + ") at " + helperConvertToReadableCoordinate(swapped[0]) + "\n\n and (" + str(dom2[1]) + ", " + str(dom2[2]) + ") at " + helperConvertToReadableCoordinate(swapped[1])+".", swapped[0], swapped[1]]]
+        result += [[helperConvertToReadableCoordinate(swapped[0]) + " ("+ str(dom1[1]) + ", " + str(dom1[2]) + ")   " +   helperConvertToReadableCoordinate(swapped[1]) +   " (" + str(dom2[1]) + ", " + str(dom2[2]) + ")", swapped[0], swapped[1]]]
     print(result)
     return result
 
@@ -475,12 +498,12 @@ def helperCompareOneChange(l1, l2):
 
 def helperConvertToReadableCoordinate(num):
     if num < 30:
-        return "R"+ str((num // 6 + 1)) + " C" + str(num % 6 + 1)
+        return "R"+ str((num // 6 + 1)) + "C" + str(num % 6 + 1)
     else:
         if num == 30:
-            return "pair 1"
+            return "PR-1"
         else:
-            return "pair 2"
+            return "PR-2"
 
 '''
 def findSolution(cb, previndexstates, alreadyValid):
@@ -626,7 +649,7 @@ def couponCollector(startState, lotrios, lopairs, lodominoes, BOUND):
     print(prevStateHistories)
     #alreadyValid = validFromRaw(startState)
     level = 0
-    while level<30:
+    while level<20:
         level += 1
         #targetValidCount += 1
         newStateHistories = []
@@ -662,7 +685,7 @@ def couponCollector(startState, lotrios, lopairs, lodominoes, BOUND):
             prevStateHistories = deepcopy(newStateHistories)
         print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
         print(level, "is done.")
-    return 40
+    return 20
 
 def helperexistsalready(indraw, previndexstates):
     for indstate in previndexstates:
@@ -718,23 +741,31 @@ cb.manualUpdate([4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6
 '''
 cb = classicalBoard(lodominoes, flod, lotrios)
 
-raw = "4446352223561516145646443336456622166613112624255534331315551211" 
-
-#[4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1]
-raw = rawvaluestoindices(raw)
 '''
+#raw = "4446352223561516145646443336456622166613112624255534331315551211" 
+#[4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6,2,2,1,6,6,6,1,3,1,1,2,6,2,4,2,5,5,5,3,4,3,3,1,3,1,5,5,5,1,2,1,1]
+#raw = rawvaluestoindices(raw)
+
 raw = [0,0,1,2,2,3,4,4,5,5,6,6,7,8,9,10,11,11,12,13,14,15,15,16,17,17,18,18,19,19,20,20]
 shuffle(raw)
 #indicesRecur(raw, [], [], lotrios, lopairs, lodominoes, 0)
+'''
+
+
+'''
 results = []
+
 for i in range(10):
     raw = [0,0,1,2,2,3,4,4,5,5,6,6,7,8,9,10,11,11,12,13,14,15,15,16,17,17,18,18,19,19,20,20]
     shuffle(raw)
-    l2 = couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
-    l3 = couponCollector(raw,  lotrios, lopairs, lodominoes, 500)
+    l2 = couponCollector(raw,  lotrios, lopairs, lodominoes, 100)
+    #l3 = couponCollector(raw,  lotrios, lopairs, lodominoes, 500)
     #results += [bfs(raw,lotrios,lopairs,lodominoes,30,5,3)]
-    results += [[l2, l3]]
+    results += [l2]
 print(results)
+
+'''
+
 '''
 cb.couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
-
+'''
