@@ -214,14 +214,19 @@ class classicalBoard:
             self.tripletlist = self.raw[:10]
             self.double = self.raw[10:]
             self.indicesraw = []
-            self.updateRaw()
+            self.movable = []
+            self.printableMoves = []
             self.printableSolution = []
+            self.updateRaw()
+            self.updateTripletList()
         else:
             self.flod = fLod
             self.lodominoes = loDominoes
             self.lotrios = loTrios
             #self.order is not always updated, in particular it is not under manual input
             self.indicesraw = rawvaluestoindices(knownRaw)
+            self.movable = []
+            self.printableMoves = []
             self.updateTripletList()
             self.updateRaw()
     
@@ -261,6 +266,7 @@ class classicalBoard:
         ir += [self.double[0][0], self.double[1][0]]
         self.indicesraw = ir
         self.dummyFontConvert()
+        self.assignMovableFromRaw(self.indicesraw, lotrios, lopairs)
 
     def updateTripletList(self):
         '''uses indicesraw, updates everything else'''
@@ -272,6 +278,7 @@ class classicalBoard:
         self.tripletlist = self.raw[:10]
         self.double = self.raw[10:]
         self.dummyFontConvert()
+        self.assignMovableFromRaw(self.indicesraw, lotrios, lopairs)
 
 
     def generateTripleList(self, input = None):
@@ -462,6 +469,58 @@ class classicalBoard:
                 for k in range(len(r)//2):
                     possible += [[i, r[k*2], 10, r[k*2+1]]]
         return possible
+
+        
+    def assignMovableFromRaw(self, raw, lotrios, lopairs):
+        l = ""
+        for i in range(32):
+            l += str(lodominoes[self.indicesraw[i]][1]) + str(lodominoes[self.indicesraw[i]][2])
+        possible = []
+        for i in range(10):
+            for j in range(i+1,10):
+                r = swappableIndices(raw[i*3:i*3+3], raw[j*3:j*3+3], lotrios, lopairs)
+                if len(r)>0:
+                    for k in range(len(r)//2):
+                        possible += [str(i) + str(r[k*2]) + str(j) + str(r[k*2+1])]
+            r = swappableIndices(raw[i*3:i*3+3], raw[-2:], lotrios, lopairs)
+            if len(r)>0:
+                for k in range(len(r)//2):
+                    possible += [str(i) + str(r[k*2]) + "*" + str(r[k*2+1])]
+        print(possible)
+        self.movable = possible
+        tempResult = []
+        for i in range(len(possible)):
+            ent = possible[i]
+            s = ""
+            if ent[0] == "*":
+                if ent[1] == "0":
+                    s += "PR-1"
+                    dom1 = 30
+                else:
+                    s += "PR-2"
+                    dom1 = 31
+            else:
+                temp = int(ent[0])
+                s += "R" + str(temp//2+1) + "C" + str((temp%2)*3 + int(ent[1])+1) + " | "
+                dom1 = int(ent[0])*3 + int(ent[1])
+            if ent[2] == "*":
+                if ent[3] == "0":
+                    s += "PR-1"
+                    dom2 = 30
+                else:
+                    s += "PR-2"
+                    dom2 = 31
+            else:
+                temp= int(ent[2])
+                s += "R" + str(temp//2+1) + "C" + str((temp%2)*3 + int(ent[3])+1)
+                dom2 = int(ent[2])*3 + int(ent[3])
+
+            newl = l[0:dom1*2] + l[dom2*2:dom2*2+2] + l[dom1*2+2:dom2*2] + l[dom1*2:dom1*2+2] + l[dom2*2+2:64]
+            tempResult += [[s, newl]]
+        print(tempResult)
+        self.printableMoves = tempResult
+
+
 
     def isGoodPair(self,indone, indtwo):
         if indone == indtwo:

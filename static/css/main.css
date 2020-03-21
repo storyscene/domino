@@ -103,6 +103,15 @@ a {
   box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
   border-radius: 3px;
   line-height: 1;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Opera and Firefox */
+
 }
 
 .domone {
@@ -122,14 +131,14 @@ a {
   background-color: #f1f1f1;
 }
 
-.hightlighted .domino {
-  background-color: #2e2e2e;
+.highlighted {
+  background-color: #262626;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.5);
-  color: #eee;
+  color: rgb(240, 240, 240);
 }
 
-.hightlighted .domone, .hightlighted .domfour {
-  color: rgb(211, 58, 58);
+.highlighted .domone, .highlighted .domfour {
+  color: rgb(228, 92, 92);
 }
 
 
@@ -209,7 +218,7 @@ pre {
   line-height: 1;
   word-break: break-all;
   word-wrap: break-word;
-  color: #333;
+  color: #555;
   background-color: #f3f3f3;
   border: none;
   border-left: 0px solid #555;
@@ -218,7 +227,7 @@ pre {
 
 pre:hover {
   color: #fff;
-  background-color: #555;
+  background-color: rgb(133, 61, 61);
 }
 
 .hintContainer {
@@ -232,9 +241,13 @@ pre:hover {
   font-size: 14px;
   margin-right: 16px;
   color: rgb(31, 31, 31);
-  border-bottom: 1px solid;
+  border-bottom: 1px solid rgb(133, 61, 61);;
   background-color: #fdfdfd;
   padding: 4px 8px;
+}
+
+.solutionButtons:hover {
+  background-color: rgb(133, 61, 61);
 }
 
 .inlineHintButton {
@@ -253,6 +266,11 @@ pre:hover {
   font-weight: 300;
 }
 
+.swapNum{
+  width: 64px;
+  border:none;
+}
+
 :focus { outline: none; }
 a:focus {
   color: #333;
@@ -263,6 +281,9 @@ a {
   color: #8d0e0e;
 }
 
+a,button {
+  transition: all 0.05s;
+}
 
 
 /* Main elements end */
