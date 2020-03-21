@@ -19,18 +19,17 @@ function onSubmitInput() {
   console.log(result)
   window.location.href = "/classical?setup="+result;
 }
-function onSolve(raw) {
-  window.location.href = "/solution?setup="+raw[0];
+var hintsDisplayed = 0
+function onHint() {
+  hintsDisplayed++;
+  for (i = 0; i < hintsDisplayed; i++) {
+    x = document.getElementById("hint"+i.toString())
+    x.style.display = "block";
+  }
 }
 
-function onHint() {
-  x = document.getElementById("possibilities")
-  if (x.style.display == "flex") {
-    x.style.display = "none";
-  }
-  else {
-    x.style.display = "flex";
-  }
+function swap(newboard) {
+  window.location.href = "/classical?setup="+newboard;
 }
 
 </script>
@@ -40,7 +39,7 @@ function onHint() {
 </div>
 <div class="big-container">
   <div class="cb-container" id = "cb-container">
-    {% if classicalBoard.isGoodPair( classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]) %}
+    {% if [classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]] in [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]] %}
       <div class="pair valid">
     {% else %}
       <div class="pair">
@@ -121,9 +120,21 @@ function onHint() {
     {% endfor %}
   </div>
   <div style = "margin-left: 64px;">
-    <button onclick="onHint()" class = "solutionButtons">Possible Swaps</button>
-    <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons">Find a Solution  (might take a while)</button>
-    <div id = "possibilities" style = "display:none;"> {{ classicalBoard.movableFromRaw(classicalBoard.indicesraw, classicalBoard.lotrios,[[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]]) }}  </div>
+    <div> A solution was found with {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }} steps  :)
+    <button onclick="onHint()" id = "reveal-hint" class = "inlineHintButton">Hint</button>
+    </div>
+    Click on a revealed step to skip to that step.
+    <p style = "font-weight: 300; line-height: 1.7; font-size: 14px; margin-top: -8px;"><br>*If clicking hint doesn't show anything, it means we didn't find a solution under 30 steps. Feel free to try the puzzle anyway though!<br></p>
+    <div class = "hints">
+      {% for i in range(20)  %}
+        {% if classicalBoard.printableSolution|length > i %}
+            <div style= "display:none;"> {{ classicalBoard.swapRaw(classicalBoard.printableSolution[i][1], classicalBoard.printableSolution[i][2]) }}</div>
+            <a href = {{"/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;">
+            <pre><code>{{ classicalBoard.printableSolution[i][0] }}</pre></code>
+            </a>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}
