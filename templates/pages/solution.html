@@ -120,11 +120,10 @@ function swap(newboard) {
     {% endfor %}
   </div>
   <div style = "margin-left: 64px;">
-    <div> A solution was found with {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }} steps  :)
+    <div> A solution was {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }}
     <button onclick="onHint()" id = "reveal-hint" class = "inlineHintButton">Hint</button>
     </div>
     Click on a revealed step to skip to that step.
-    <p style = "font-weight: 300; line-height: 1.7; font-size: 14px; margin-top: -8px;"><br>*If clicking hint doesn't show anything, it means we didn't find a solution under 30 steps. Feel free to try the puzzle anyway though!<br></p>
     <div class = "hints">
       {% for i in range(20)  %}
         {% if classicalBoard.printableSolution|length > i %}

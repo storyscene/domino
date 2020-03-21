@@ -409,8 +409,8 @@ class classicalBoard:
         print(validCount)
         if validCount == 11:
             print("DONE DONE DONE", level)
-            return level
-        while level<30:
+            return " found in " + str(level) + " steps!"
+        while level<20:
             level += 1
             #targetValidCount += 1
             newStateHistories = []
@@ -427,7 +427,7 @@ class classicalBoard:
                                 print("DONE DONE DONE", level)
                                 print(localVertex[1] + [changingState])
                                 self.printableSolution = formatPrintableSol(localVertex[1] + [changingState])
-                                return level
+                                return " found in " + str(level) + " steps!"
                             if validCount >= targetValidCount:
                                 targetValidCount = validCount + 1
                                 print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
@@ -447,7 +447,7 @@ class classicalBoard:
                 prevStateHistories = deepcopy(newStateHistories)
             print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
             print(level, "is done.")
-        return 30
+        return " not found in 20 steps. No hints are available :("
     
     def movableFromRaw(self, raw, lotrios, lopairs):
         possible = []
