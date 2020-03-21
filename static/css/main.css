@@ -108,7 +108,7 @@ a {
     background-color: #fff;
     font-weight: 400;
     box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
-    border-radius: 3px;
+    border-radius: 8px;
     line-height: 1;
   
     -webkit-touch-callout: none; /* iOS Safari */
@@ -188,7 +188,7 @@ a {
     background-color: #fff;
     font-weight: 400;
     box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
-    border-radius: 3px;
+    border-radius: 8px;
     line-height: 1;
 
     -webkit-touch-callout: none; /* iOS Safari */
