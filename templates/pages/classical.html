@@ -150,13 +150,33 @@ function deHighlightPair(thepair) {
   x1.classList.remove('faintlyHighlighted');
   x2.classList.remove('faintlyHighlighted');
 }
+  
+function clickEffect(e){
+  var d=document.createElement("div");
+    let rng = Math.floor(Math.random() * 6)+1;
+  d.className="clickEffect"+rng.toString();
+  d.style.top=e.clientY+"px";d.style.left=e.clientX+"px";
+  document.body.appendChild(d);
+  d.addEventListener('animationend',function(){d.parentElement.removeChild(d);}.bind(this));
+}
+
+function congratulate() {
+  document.addEventListener('click', clickEffect, {
+  once: true
+});
+}
+
 
 </script>
 
 <div class="page-header hideOnPhone">
   <h1>Classical Mode</h1>
 </div>
-<div class="big-container">
+{% if classicalBoard.alrValid()|length==11 %}
+  <div id = "largest-container" class="big-container congratulate" onclick = "congratulate()">
+{% else %}
+  <div id = "largest-container" class="big-container">
+{% endif %}
   <div class="cb-container" id = "cb-container">
     {% if classicalBoard.isGoodPair( classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]) %}
       <div class="pair valid">

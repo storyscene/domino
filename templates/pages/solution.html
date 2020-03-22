@@ -33,7 +33,7 @@ function swap(newboard) {
 }
 
 function highlightElement(name) {
-  document.getElementById("domino"+name.toString()).classList.add('highlighted');
+  document.getElementById("domino"+name.toString()).classList.add('faintlyHighlighted');
 }
 var selectedList = []
 
@@ -41,16 +41,16 @@ function highlight(x, allPossible, raw) {
   var url = window.location.href;
   console.log(selectedList)
   if (selectedList.length == 2) {
-    selectedList[0].classList.remove('highlighted');
-    selectedList[1].classList.remove('highlighted');
+    selectedList[0].classList.remove('faintlyHighlighted');
+    selectedList[1].classList.remove('faintlyHighlighted');
     selectedList = [];
   }
   if (selectedList.includes(x)) {
-    x.classList.remove('highlighted');
+    x.classList.remove('faintlyHighlighted');
     selectedList = selectedList.filter(item => item !== x);
   }
   else {
-    x.classList.add('highlighted'); 
+    x.classList.add('faintlyHighlighted'); 
     selectedList.push(x);
   }
   if (selectedList.length == 2) {
@@ -206,7 +206,6 @@ function deHighlightPair(thepair) {
     <div> A solution was {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }}
     <button onclick="onHint()" id = "reveal-hint" class = "inlineHintButton">Hint</button>
     </div>
-    Click on a revealed step to skip to that step.
     <div class = "hints">
       {% for i in range(20)  %}
         {% if classicalBoard.printableSolution|length > i %}
