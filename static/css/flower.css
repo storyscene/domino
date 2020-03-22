@@ -526,7 +526,7 @@ code {
     box-sizing:border-box;
     background: url("1.png") no-repeat;
     background-position: center;
-    background-size: 80% 80%;
+    background-size: 45% 45%;
     animation:clickEffect 2s ease-in-out;
     z-index: 0;
   } 
@@ -536,7 +536,7 @@ code {
     box-sizing:border-box;
     background: url("2.png") no-repeat;
     background-position: center;
-    background-size: 60% 60%;
+    background-size: 35% 35%;
     animation:clickEffect 2s ease-in-out;
     z-index: 0;
   }
@@ -546,7 +546,7 @@ code {
     box-sizing:border-box;
     background: url("3.png") no-repeat;
     background-position: center;
-    background-size: 70% 70%;
+    background-size: 40% 40%;
     animation:clickEffect 2s ease-in-out;
     z-index: 0;
   }
@@ -555,7 +555,7 @@ code {
     box-sizing:border-box;
     background: url("4.png") no-repeat;
     background-position: center;
-    background-size: 70% 70%;
+    background-size: 40% 40%;
     animation:clickEffect 2s ease-in-out;
     z-index: 8;
   }
@@ -568,18 +568,14 @@ code {
       margin: -50px;
       opacity: 0;
     }
-    30%{
+    10%{
       margin: -50px;
       opacity:0.9;
     }
-    50%{
+    60%{
       margin: -50px;
       opacity: 0;
     }
-    70%{
-        margin: -50px;
-        opacity:0.9;
-      }
     100%{
       margin: -50px;
       opacity: 0;
