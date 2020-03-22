@@ -64,8 +64,9 @@ a {
 
   .bigHintContainer {
     margin:0;
-    margin-top:calc(100vh - 570px);
+    margin: calc(100vh - 590px) 12px 0 12px;
     justify-content: center;
+    font-size: 13px;
   }
 
   .hideOnPhone {
@@ -142,7 +143,12 @@ a {
     margin-top: 12px;
   }
   
-  
+  .invisibleTag {
+    color: transparent;
+    font-size: 20px;
+    width: 100%;
+    height:144px;
+  }
 
 }
 @media(min-width: 500px) {
@@ -407,3 +413,134 @@ a,button {
   100% { transform: translate(0px, 0px) rotate(-1deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
 }
 
+div.clickEffect1{
+  position:fixed;
+  box-sizing:border-box;
+  border-style:solid;
+  border-color:rgb(87, 87, 87);
+  border-radius:50%;
+  animation:clickEffect1 0.4s ease-out;
+  z-index:99999;
+}
+@keyframes clickEffect1{
+  0%{
+    opacity:1;
+    width:3px; height:3px;
+    margin:-1.5px;
+    border-width:1px;
+  }
+  100%{
+    opacity:0.1;
+    width:80px; height:80px;
+    margin:-40px;
+    border-width:0.03px;
+    }
+}
+
+
+div.clickEffect2{
+  position:fixed;
+  box-sizing:border-box;
+  border-style:solid;
+  border-color:#000;
+  border-radius:50%;
+  animation:clickEffect2 0.4s ease-out;
+  z-index:99999;
+}
+@keyframes clickEffect2{
+  0%{
+    opacity:1;
+    width:3px; height:3px;
+    margin:-1.5px;
+    border-width:1px;
+  }
+  100%{
+    opacity:0.2;
+    width:50px; height:50px;
+    margin:-25px;
+    border-width:0.03px;
+    }
+}
+
+div.clickEffect5{
+  position:fixed;
+  box-sizing:border-box;
+  background: url("cong2.png") no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation:clickEffectWord 2s ease-out;
+  z-index:99999;
+}
+div.clickEffect6{
+  position:fixed;
+  box-sizing:border-box;
+  background: url("cong3.png") no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation:clickEffectWord 2s ease-out;
+  z-index:99999;
+}
+div.clickEffect3{
+  position:fixed;
+  box-sizing:border-box;
+  background: url("cong4.png") no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation:clickEffect 2s ease-out;
+  z-index:99999;
+}
+div.clickEffect4{
+  position:fixed;
+  box-sizing:border-box;
+  background: url("cong5.png") no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation:clickEffect 2s ease-out;
+  z-index:99999;
+}
+
+@keyframes clickEffectWord{
+  0%{
+    width:200px;
+    height:200px;
+    margin: -100px;
+    opacity: 0;
+  }
+  10%{
+    margin: -100px;
+    opacity:0.9;
+  }
+  60%{
+    margin: -100px;
+    opacity: 0.1;
+  }
+  100%{
+    margin: -100px;
+    opacity: 0;
+  }
+}
+
+@keyframes clickEffect{
+  0%{
+    width:400px;
+    height:400px;
+    margin: -200px;
+    opacity: 0;
+  }
+  10%{
+    margin: -200px;
+    opacity:0.9;
+  }
+  60%{
+    margin: -200px;
+    opacity: 0.1;
+  }
+  100%{
+    margin: -200px;
+    opacity: 0;
+  }
+}

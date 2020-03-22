@@ -32,7 +32,13 @@
 <script src="/static/js/libs/modernizr-2.8.2.min.js"></script>
 <!--[if lt IE 9]><script src="/static/js/libs/respond-1.4.2.min.js"></script><![endif]-->
 <!-- /scripts -->
-
+<script>
+function flowerpage() {
+    if (!window.location.href.includes("solution") && !window.location.href.includes("classical") && !window.location.href.includes("randomgame")) {
+      window.location.href = "/flower";
+    }
+}
+</script>
 </head>
 <body>
 
@@ -92,9 +98,10 @@
       {% block content %}{% endblock %}
       
     </main>
-
   </div>
 
+  <div id = "invisiTag">
+  <div onclick="flowerpage()" class = "invisibleTag" > </div></div>
   <div id="footer">
     <div class="container">
       <p>Your Company &copy; All Rights Reserved.</p>
