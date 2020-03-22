@@ -1,0 +1,588 @@
+
+/**
+ * @file
+ * Main stylesheet file.
+ */
+
+ @font-face {
+    font-family: "Dicey";
+    src: url("../fonts/Dicey.ttf") format("truetype");
+  }
+  
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat-Light.ttf") format("truetype");
+    font-weight: 300;
+  }
+  
+  /*****************************************************************************
+   * Main elements
+   ****************************************************************************/
+  html {
+    overflow-y: scroll;
+  }
+  body {
+    font-family: "Montserrat", sans-serif;
+    font-size: medium;
+  }
+  a {
+    cursor: pointer;
+  }
+  ::selection {
+    background: #555;
+    color: #FFF;
+  }
+  ::-moz-selection {
+    background: #555;
+    color: #FFF;
+  }
+  ::-webkit-selection {
+    background: #555;
+    color: #FFF;
+  }
+
+
+  /* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0;
+  background-color: #fdfdfd;
+}
+
+p {
+  z-index: 10;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  display: none;
+  height: 30px;
+  text-align: right;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+h1 {
+  font-size: 32px;
+}
+
+.lead {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.navbar {
+  box-shadow: none;
+  background-color: none;
+  background-image: none;
+  height: min-content;
+  font-size: small;
+}
+
+.navbar .active a {
+  box-shadow: none !important;
+  background-color: #ccc;
+  background-image: none !important;
+}
+.navbar-default {
+  box-shadow: none !important;
+  background-color: #fbfbfb;
+  background-image: none !important;
+}
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+  
+  /* dominoes */
+  
+  @media (max-width: 500px) {
+    .select-mode {
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: min(90%, 280px);
+    }
+    .select-mode .fakeButton {
+      text-align: left;
+    }
+    .select-mode button {
+      text-align: left;
+    }
+  
+    .bigHintContainer {
+      margin:0;
+      margin-top:calc(100vh - 570px);
+      justify-content: center;
+    }
+  
+    .hideOnPhone {
+      display: none;
+    }
+  
+    .big-input-container {
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .trio {
+      display: flex;
+      width: min-content;
+      padding: 12px 12px;
+      border-radius: 1px;
+    }
+    
+    .pair {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      padding: 12px 12px;
+      grid-area: pair;
+    }
+    
+    .domino {
+      font-family: "Dicey", sans-serif;
+      font-size: 27px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 72px;
+      width: 45px;
+      padding: 5.4px 5.4px 9px 7.2px;
+      margin: 0 2px;
+      align-content: center;
+      text-align: center;
+      background-color: #fff;
+      font-weight: 400;
+      box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
+      border-radius: 8px;
+      line-height: 1;
+    
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+    
+    }
+    
+    .domone {
+      color: rgb(168, 29, 29);
+    }
+    
+    .domfour {
+      color: rgb(168, 29, 29);
+      margin-left:6px;
+    }
+    
+    .domspacy {
+      margin-left:6px;
+    }
+    
+    
+    .big-container {
+      display: grid;
+      grid-template-columns: auto;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    
+    
+  
+  }
+  @media(min-width: 500px) {
+  
+    .hideOnLaptop {
+      display: none;
+    }
+  
+    .bigHintContainer {
+      margin-left:64px;
+    }
+  
+    .big-input-container {
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .trio {
+      display: flex;
+      width: min-content;
+      padding: 12px 12px;
+      border-radius: 1px;
+    }
+  
+    .pair {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      padding: 12px 12px;
+      grid-area: pair;
+    }
+  
+    .domino {
+      font-family: "Dicey", sans-serif;
+      font-size: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 80px;
+      width: 50px;
+      padding: 6px 8px 10px 8px;
+      margin: 0 2px;
+      align-content: center;
+      text-align: center;
+      background-color: #fff;
+      font-weight: 400;
+      box-shadow: 2px 2px 4px rgba(143, 143, 143, 0.2);
+      border-radius: 8px;
+      line-height: 1;
+  
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  
+  }
+  
+  .domone {
+    color: rgb(168, 29, 29);
+  }
+  
+  .domfour {
+    color: rgb(168, 29, 29);
+    margin-left:6px;
+  }
+  
+  .domspacy {
+    margin-left:6px;
+  }
+  
+  
+  .big-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: left;
+  }
+  
+  
+  }
+  .valid {
+    background-color: #f1f1f1;
+  }
+  
+  .highlighted {
+    background-color: #333;
+    box-shadow: 2px 2px 4px rgba(0,0,0, 0.5);
+    color: rgb(240, 240, 240);
+  }
+  
+  .highlighted .domone, .highlighted .domfour {
+    color: rgb(196, 82, 82);
+  }
+  
+  .faintlyHighlighted {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+  }
+  
+  
+  .cb-container {
+    display: grid;
+    grid-template-areas:
+    'pair pair'
+    'trio0 trio1'
+    'trio2 trio3'
+    'trio4 trio5'
+    'trio6 trio7'
+    'trio8 trio9';
+    width: min-content;
+    padding: 0;
+    margin: 0;
+    height:min-content;
+  }
+  
+  button {
+    background-color: #f3f3f3;
+    background-image: none;
+    border:none;
+    border-bottom: 2px solid #555;
+    padding: 8px 20px;
+    margin: 8px 24px 8px 0;
+  }
+  
+  button:hover {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  .fakeButton {
+    background-color: #f3f3f3;
+    background-image: none;
+    border:none;
+    border-bottom: 2px solid #555;
+    color: #333;
+    padding: 8px 20px;
+    margin: 8px 24px 8px 0;
+    height:min-content;
+    vertical-align: middle;
+  }
+  
+  .fakeButton:hover {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  input {
+    background-color: #f3f3f3;
+    background-image: none;
+    border:none;
+    border-bottom: 2px solid #555;
+    padding: 8px;
+    margin: 8px 8px 8px 0;
+  }
+  
+  pre {
+    display: block;
+    padding: 8px 16px;
+    margin: 16px 0 -16px;
+    font-size: 10px;
+    line-height: 1;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #555;
+    background-color: #f3f3f3;
+    border: none;
+    border-left: 0px solid #555;
+    border-radius: 0;
+  }
+  
+  pre:hover {
+    color: #fff;
+    background-color: rgb(133, 61, 61);
+  }
+  
+  .hintContainer {
+    margin: 0 20px 0 0;
+    flex-direction: row;
+    justify-content: space-between;
+    width: min(400px, 100%);
+  }
+  
+  .solutionButtons{
+    font-size: 14px;
+    margin-right: 16px;
+    color: rgb(31, 31, 31);
+    border-bottom: 1px solid rgb(133, 61, 61);;
+    background-color: #fdfdfd;
+    padding: 4px 8px;
+  }
+  
+  .solutionButtons:hover {
+    background-color: rgb(133, 61, 61);
+    color: #f3f3f3;
+  }
+  
+  .inlineHintButton {
+    font-size: 14px;
+    margin-left: 16px;
+    color: rgb(31, 31, 31);
+    border-bottom: none;
+    background-color: #f3f3f3;
+    padding: 4px 8px;
+  }
+  
+  
+  #possibilities {
+    margin-top: 4px;
+    font-size: small;
+    font-weight: 300;
+  }
+  
+  .swapNum{
+    width: 64px;
+    border:none;
+  }
+  
+  :focus { outline: none; }
+  a:focus {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  a {
+    color: #8d0e0e;
+  }
+  
+  a,button {
+    transition: all 0.05s;
+  }
+  
+  
+  /* Main elements end */
+  
+  
+  /*****************************************************************************
+   * Various other styles
+   ****************************************************************************/
+  
+  /* Various other styles end */
+  
+  
+  
+  .shaky {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.15s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: 2.5;
+  }
+  
+@media (max-width: 500px) {
+
+    .container>.navbar-header {
+        background-color: #fff;
+        padding:0;
+        border-bottom: none;
+    }
+    .navbar{
+        display: none !important;
+    }
+    .container {
+        margin: auto 25px ;
+    }
+    a.flowerNav {
+        color: #555 !important;
+    }
+    .flowerNav a:hover {
+        color: #333;
+    }
+
+    .lead {
+        font-size: 14px;
+    }
+    .flower {
+        background-image: url("0.jpg");
+        background-size: cover;
+        z-index: -5;
+    }
+
+  @keyframes shake {
+    0% { transform: translate(0px, 0px) rotate(0deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+    15% { transform: translate(1px, 0px) rotate(1deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+    85% { transform: translate(-1px, 0px) rotate(0deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+    100% { transform: translate(0px, 0px) rotate(-1deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+  }
+  
+  
+  div.clickEffect1{
+    position:fixed;
+    box-sizing:border-box;
+    background: url("1.png") no-repeat;
+    background-position: center;
+    background-size: 80% 80%;
+    animation:clickEffect 2s ease-in-out;
+    z-index: 0;
+  } 
+
+  div.clickEffect2{
+    position:fixed;
+    box-sizing:border-box;
+    background: url("2.png") no-repeat;
+    background-position: center;
+    background-size: 60% 60%;
+    animation:clickEffect 2s ease-in-out;
+    z-index: 0;
+  }
+
+  div.clickEffect3{
+    position:fixed;
+    box-sizing:border-box;
+    background: url("3.png") no-repeat;
+    background-position: center;
+    background-size: 70% 70%;
+    animation:clickEffect 2s ease-in-out;
+    z-index: 0;
+  }
+  div.clickEffect4{
+    position:fixed;
+    box-sizing:border-box;
+    background: url("4.png") no-repeat;
+    background-position: center;
+    background-size: 70% 70%;
+    animation:clickEffect 2s ease-in-out;
+    z-index: 8;
+  }
+
+
+  @keyframes clickEffect{
+    0%{
+      width:100px;
+      height:100px;
+      margin: -50px;
+      opacity: 0;
+    }
+    30%{
+      margin: -50px;
+      opacity:0.9;
+    }
+    50%{
+      margin: -50px;
+      opacity: 0;
+    }
+    70%{
+        margin: -50px;
+        opacity:0.9;
+      }
+    100%{
+      margin: -50px;
+      opacity: 0;
+    }
+  }
+}

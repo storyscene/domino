@@ -147,6 +147,9 @@ a {
 }
 @media(min-width: 500px) {
 
+  .hideOnLaptop {
+    display: none;
+  }
 
   .bigHintContainer {
     margin-left:64px;
@@ -228,15 +231,18 @@ a {
 }
 
 .highlighted {
-  background-color: #262626;
+  background-color: #333;
   box-shadow: 2px 2px 4px rgba(0,0,0, 0.5);
   color: rgb(240, 240, 240);
 }
 
 .highlighted .domone, .highlighted .domfour {
-  color: rgb(228, 92, 92);
+  color: rgb(196, 82, 82);
 }
 
+.faintlyHighlighted {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+}
 
 
 .cb-container {
@@ -337,6 +343,7 @@ pre:hover {
 
 .solutionButtons:hover {
   background-color: rgb(133, 61, 61);
+  color: #f3f3f3;
 }
 
 .inlineHintButton {
@@ -383,4 +390,20 @@ a,button {
  ****************************************************************************/
 
 /* Various other styles end */
+
+
+
+.shaky {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.15s;
+  /* When the animation is finished, start again */
+  animation-iteration-count: 2.5;
+}
+
+@keyframes shake {
+  0% { transform: translate(0px, 0px) rotate(0deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+  15% { transform: translate(1px, 0px) rotate(1deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+  85% { transform: translate(-1px, 0px) rotate(0deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+  100% { transform: translate(0px, 0px) rotate(-1deg); box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);}
+}
 
