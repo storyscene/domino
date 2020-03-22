@@ -32,19 +32,102 @@ function swap(newboard) {
   window.location.href = "/classical?setup="+newboard;
 }
 
+function highlightElement(name) {
+  document.getElementById("domino"+name.toString()).classList.add('highlighted');
+}
+var selectedList = []
+
+function highlight(x, allPossible, raw) {
+  var url = window.location.href;
+  console.log(selectedList)
+  if (selectedList.length == 2) {
+    selectedList[0].classList.remove('highlighted');
+    selectedList[1].classList.remove('highlighted');
+    selectedList = [];
+  }
+  if (selectedList.includes(x)) {
+    x.classList.remove('highlighted');
+    selectedList = selectedList.filter(item => item !== x);
+  }
+  else {
+    x.classList.add('highlighted'); 
+    selectedList.push(x);
+  }
+  if (selectedList.length == 2) {
+    swap1 = selectedList[0].id.match(/\d+/)[0];
+    swap2 = selectedList[1].id.match(/\d+/)[0];
+    if (parseInt(swap1,10) > parseInt(swap2,10)) {
+      let temp = swap1;
+      swap1 = swap2;
+      swap2 = temp;
+    }
+    console.log(swap1, swap2);
+    result = ""
+    if (swap1 == 30) {
+      result += "*0";
+    }
+    else if (swap1 == 31) {
+      result += "*1";
+    }
+    else {
+      result += Math.floor(swap1/3).toString()
+      result += (swap1%3).toString()
+    }
+    if (swap2 == 30) {
+      result += "*0";
+    }
+    else if (swap2 == 31) {
+      result += "*1";
+    }
+    else {
+      result += Math.floor(swap2/3).toString();
+      result += (swap2%3).toString();
+    }
+    console.log(result);
+    console.log(allPossible);
+    if (allPossible.includes(result)) {
+      console.log("YAY");
+      temp = "";
+      temp += raw[0].slice(0,swap1*2);
+      temp += raw[0].slice(swap2*2, swap2*2+2);
+      temp += raw[0].slice(swap1*2+2, swap2*2);
+      temp += raw[0].slice(swap1*2, swap1*2+2);
+      temp += raw[0].slice(swap2*2+2, 64);
+      window.location.href = "classical?setup="+temp;
+    }
+    else {
+      console.log("doesn't work :(")
+    }
+  }
+}
+
+function highlightPair(thepair) {
+  x1 = document.getElementById("domino"+thepair[0].toString())
+  x2 = document.getElementById("domino"+thepair[1].toString())
+  x1.classList.add('faintlyHighlighted');
+  x2.classList.add('faintlyHighlighted');
+}
+
+function deHighlightPair(thepair) {
+  x1 = document.getElementById("domino"+thepair[0].toString())
+  x2 = document.getElementById("domino"+thepair[1].toString())
+  x1.classList.remove('faintlyHighlighted');
+  x2.classList.remove('faintlyHighlighted');
+}
+
 </script>
 
-<div class="page-header">
+<div class="page-header hideOnPhone">
   <h1>Classical Mode</h1>
 </div>
 <div class="big-container">
   <div class="cb-container" id = "cb-container">
-    {% if [classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]] in [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]] %}
+    {% if classicalBoard.isGoodPair( classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]) %}
       <div class="pair valid">
     {% else %}
       <div class="pair">
     {% endif %}
-        <div class="domino">
+        <div class="domino" id="domino30" onclick="highlight(this, {{classicalBoard.movable}}, {{ [classicalBoard.getActualRaw()] }})">
           {% if classicalBoard.dummyFont[60] == "k"%}
             <div class = "domone">{{ classicalBoard.dummyFont[60] }}</div>
           {% elif classicalBoard.dummyFont[60] == "n"%}
@@ -64,7 +147,7 @@ function swap(newboard) {
           {% else %}
             <div class = "domspacy">{{ classicalBoard.dummyFont[61] }}</div>
           {% endif %}</div>
-        <div class="domino" id="domino">
+        <div class="domino" id="domino31" onclick="highlight(this, {{classicalBoard.movable}}, {{ [classicalBoard.getActualRaw()] }})">
           {% if classicalBoard.dummyFont[62] == "k"%}
             <div class = "domone">{{ classicalBoard.dummyFont[62] }}</div>
           {% elif classicalBoard.dummyFont[62] == "n"%}
@@ -88,12 +171,13 @@ function swap(newboard) {
     </div>
     {% for i in range(10) %}
       {% if classicalBoard.raw[i].isValid() %}
-        <div class="trio valid">
+        <div class="trio valid" id = {{ "trio" + i|string }}>
       {% else %}
-        <div class="trio">
+        <div class="trio" id = {{ "trio" + i|string }}>
       {% endif %}
         {% for j in range(3) %}
-          <div class="domino">
+          <div class="domino" id = {{ "domino" + (j+i*3)|string}} onclick="highlight(this, {{classicalBoard.movable}}, {{ [classicalBoard.getActualRaw()] }})">
+
               {% if classicalBoard.dummyFont[i*6+j*2] == "k"%}
                 <div class = "domone">{{ classicalBoard.dummyFont[i*6+j*2] }}</div>
               {% elif classicalBoard.dummyFont[i*6+j*2] == "n"%}
@@ -127,7 +211,7 @@ function swap(newboard) {
       {% for i in range(20)  %}
         {% if classicalBoard.printableSolution|length > i %}
             <div style= "display:none;"> {{ classicalBoard.swapRaw(classicalBoard.printableSolution[i][1], classicalBoard.printableSolution[i][2]) }}</div>
-            <a href = {{"/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;">
+            <a href = {{"/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;" onmouseover = "highlightPair({{classicalBoard.printableSolution[i][1:3]}})" onmouseout = "deHighlightPair({{classicalBoard.printableSolution[i][1:3]}})">
             <pre><code>{{ classicalBoard.printableSolution[i][0] }}</pre></code>
             </a>
         {% endif %}

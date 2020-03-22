@@ -65,7 +65,7 @@ function onSubmitSwap(movable) {
 }
 
 function highlightElement(name) {
-  document.getElementById("domino"+name.toString()).classList.add('highlighted');
+  document.getElementById("domino"+name.toString()).classList.add('faintlyHighlighted');
 }
 var selectedList = []
 
@@ -73,16 +73,16 @@ function highlight(x, allPossible, raw) {
   var url = window.location.href;
   console.log(selectedList)
   if (selectedList.length == 2) {
-    selectedList[0].classList.remove('highlighted');
-    selectedList[1].classList.remove('highlighted');
+    selectedList[0].classList.remove('shaky');
+    selectedList[1].classList.remove('shaky');
     selectedList = [];
   }
   if (selectedList.includes(x)) {
-    x.classList.remove('highlighted');
+    x.classList.remove('faintlyHighlighted');
     selectedList = selectedList.filter(item => item !== x);
   }
   else {
-    x.classList.add('highlighted'); 
+    x.classList.add('faintlyHighlighted'); 
     selectedList.push(x);
   }
   if (selectedList.length == 2) {
@@ -129,10 +129,27 @@ function highlight(x, allPossible, raw) {
     }
     else {
       console.log("doesn't work :(")
+      selectedList[0].classList.add('shaky');
+      selectedList[1].classList.add('shaky');
+      selectedList[0].classList.remove('faintlyHighlighted');
+      selectedList[1].classList.remove('faintlyHighlighted');
     }
   }
 }
 
+function highlightPair(thepair) {
+  x1 = document.getElementById("domino"+thepair[0].toString())
+  x2 = document.getElementById("domino"+thepair[1].toString())
+  x1.classList.add('faintlyHighlighted');
+  x2.classList.add('faintlyHighlighted');
+}
+
+function deHighlightPair(thepair) {
+  x1 = document.getElementById("domino"+thepair[0].toString())
+  x2 = document.getElementById("domino"+thepair[1].toString())
+  x1.classList.remove('faintlyHighlighted');
+  x2.classList.remove('faintlyHighlighted');
+}
 
 </script>
 
@@ -225,9 +242,10 @@ function highlight(x, allPossible, raw) {
     <div>
     <button onclick="onHint()" class = "solutionButtons">Possible Swaps</button>
     <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons">Find a Solution</button>
+    <a href="/randomgame" class = "solutionButtons hideOnLaptop">New Game</a>
     <div id = "possibilities" class = "hints" style= "display:none;">
       {% for i in range(classicalBoard.printableMoves|length)  %}
-            <a href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
+            <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
             <pre><code>{{ classicalBoard.printableMoves[i][0] }}</pre></code>
             </a>
       {% endfor %}

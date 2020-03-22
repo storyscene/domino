@@ -46,6 +46,11 @@ def login_required(test):
 def home():
     return render_template('pages/home.html')
 
+@app.route('/flower')
+def flower():
+    return render_template('pages/flower_home.html')
+
+
 
 @app.route('/rules')
 def rules():

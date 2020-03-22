@@ -516,7 +516,8 @@ class classicalBoard:
                 dom2 = int(ent[2])*3 + int(ent[3])
 
             newl = l[0:dom1*2] + l[dom2*2:dom2*2+2] + l[dom1*2+2:dom2*2] + l[dom1*2:dom1*2+2] + l[dom2*2+2:64]
-            tempResult += [[s, newl]]
+            newerl = [dom1, dom2]
+            tempResult += [[s, newl, newerl]]
         print(tempResult)
         self.printableMoves = tempResult
 
