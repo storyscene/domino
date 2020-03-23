@@ -132,7 +132,7 @@ code {
   
   /* dominoes */
   
-  @media (max-width: 500px) {
+  @media (max-width: 599px) {
     .select-mode {
       display:flex;
       flex-direction: column;
@@ -229,7 +229,7 @@ code {
     
   
   }
-  @media(min-width: 500px) {
+  @media(min-width: 600px) {
   
     .hideOnLaptop {
       display: none;
@@ -521,7 +521,7 @@ code {
   }
   
   
-  div.clickEffect1{
+  div.ce1{
     position:fixed;
     box-sizing:border-box;
     background: url("1.png") no-repeat;
@@ -531,7 +531,7 @@ code {
     z-index: 0;
   } 
 
-  div.clickEffect2{
+  div.ce2{
     position:fixed;
     box-sizing:border-box;
     background: url("2.png") no-repeat;
@@ -541,7 +541,7 @@ code {
     z-index: 0;
   }
 
-  div.clickEffect3{
+  div.ce3{
     position:fixed;
     box-sizing:border-box;
     background: url("3.png") no-repeat;
@@ -550,7 +550,7 @@ code {
     animation:clickEffect 2s ease-in-out;
     z-index: 0;
   }
-  div.clickEffect4{
+  div.ce4{
     position:fixed;
     box-sizing:border-box;
     background: url("4.png") no-repeat;

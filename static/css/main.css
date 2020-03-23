@@ -23,8 +23,15 @@
 /*****************************************************************************
  * Main elements
  ****************************************************************************/
-html {
-  overflow-y: scroll;
+ html {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px !important;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+  display: none !important;
 }
 body {
   font-family: "Montserrat", sans-serif;
@@ -48,7 +55,7 @@ a {
 
 /* dominoes */
 
-@media (max-width: 500px) {
+@media (max-width: 599px) {
   .select-mode {
     display:flex;
     flex-direction: column;
@@ -151,7 +158,7 @@ a {
   }
 
 }
-@media(min-width: 500px) {
+@media(min-width: 600px) {
 
   .hideOnLaptop {
     display: none;
