@@ -239,6 +239,21 @@ a {
 
 
 }
+
+
+@media(min-width: 1000px) {
+  .bigHintContainer {
+    margin-left:160px;
+  }
+}
+
+@media(min-width: 1200px) {
+  .bigHintContainer {
+    margin-left:200px;
+  }
+}
+
+
 .valid {
   background-color: #f1f1f1;
 }
@@ -320,7 +335,6 @@ input {
 
 pre {
   display: block;
-  padding: 8px 16px;
   margin: 16px 0 -16px;
   font-size: 10px;
   line-height: 1;
@@ -331,6 +345,13 @@ pre {
   border: none;
   border-left: 0px solid #555;
   border-radius: 0;
+  padding: 10px 12px;
+  height:min-content;
+}
+
+code {
+  font-family: Inconsolata, monospace;
+  font-size: 12px !important;
 }
 
 pre:hover {
