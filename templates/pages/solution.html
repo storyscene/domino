@@ -41,8 +41,8 @@ function highlight(x, allPossible, raw) {
   var url = window.location.href;
   console.log(selectedList)
   if (selectedList.length == 2) {
-    selectedList[0].classList.remove('faintlyHighlighted');
-    selectedList[1].classList.remove('faintlyHighlighted');
+    selectedList[0].classList.remove('shaky');
+    selectedList[1].classList.remove('shaky');
     selectedList = [];
   }
   if (selectedList.includes(x)) {
@@ -97,10 +97,13 @@ function highlight(x, allPossible, raw) {
     }
     else {
       console.log("doesn't work :(")
+      selectedList[0].classList.add('shaky');
+      selectedList[1].classList.add('shaky');
+      selectedList[0].classList.remove('faintlyHighlighted');
+      selectedList[1].classList.remove('faintlyHighlighted');
     }
   }
 }
-
 function highlightPair(thepair) {
   x1 = document.getElementById("domino"+thepair[0].toString())
   x2 = document.getElementById("domino"+thepair[1].toString())
