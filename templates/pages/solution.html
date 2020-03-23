@@ -241,7 +241,7 @@ function deHighlightPair(thepair) {
     <div id = "possibilities" class = "hints" style= "display:none;">
       {% for i in range(classicalBoard.printableMoves|length)  %}
             <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
-            <pre><code>{{ classicalBoard.printableMoves[i][0] }}</pre></code>
+            <pre><code style = "font-family: inconsolata, monospace">{{ classicalBoard.printableMoves[i][0] }}</pre></code>
             </a>
       {% endfor %}
     </div>
