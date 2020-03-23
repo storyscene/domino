@@ -39,7 +39,7 @@ function flowerpage() {
     }
 }
 var language = window.navigator.userLanguage || window.navigator.language;
-if (language != "zh"){
+if (language.slice(0,2) != "zh"){
   var curref = window.location.href;
   if (curref.includes("zh")) {
     var beginSlice = curref.indexOf("/zh")
