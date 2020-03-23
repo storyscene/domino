@@ -65,7 +65,7 @@ body {
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
   padding: 0;
-  background-color: #fdfdfd;
+  background-color: #fbfbfb;
 }
 
 p {
@@ -421,7 +421,7 @@ code {
     margin-right: 16px;
     color: rgb(31, 31, 31);
     border-bottom: 1px solid rgb(133, 61, 61);;
-    background-color: #fdfdfd;
+    background-color: #fbfbfb;
     padding: 4px 8px;
   }
   

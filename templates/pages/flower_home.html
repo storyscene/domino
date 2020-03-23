@@ -2,7 +2,12 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-
+<script>
+var language = window.navigator.userLanguage || window.navigator.language;
+if (language == "zh"){
+  window.location.href = "/zh/flower";
+}
+</script>
 <div class="page-header">
   <h1>Welcome!</h1>
 </div>

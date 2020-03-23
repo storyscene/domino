@@ -1,14 +1,10 @@
-{% extends 'layouts/main.html' %}
+{% extends 'zhlayouts/zh_main.html' %}
 {% block title %}Classical{% endblock %}
 <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
 
 {% block content %}
 
 <script>
-var language = window.navigator.userLanguage || window.navigator.language;
-if (language == "zh"){
-  window.location.href = "/zh/classical";
-}
 function onStartInput() {
   x = document.getElementById("inputContainer");
   x.style.display = "inline-block";
@@ -21,12 +17,16 @@ function onSubmitInput() {
   x = document.getElementById("inputBox");
   result = x.value.replace(/\s/g, '');
   console.log(result)
-  window.location.href = "/classical?setup="+result;
+  window.location.href = "/zh/classical?setup="+result;
 }
-function onSolve(raw) {
-  window.location.href = "/solution?setup="+raw[0];
+var hintsDisplayed = 0
+function onRevealSol() {
+  hintsDisplayed++;
+  for (i = 0; i < hintsDisplayed; i++) {
+    x = document.getElementById("hint"+i.toString())
+    x.style.display = "block";
+  }
 }
-
 function onHint() {  
   x = document.getElementById("possibilities")
   if (x.style.display == "block") {
@@ -37,35 +37,9 @@ function onHint() {
   }
 }
 
-function onSubmitSwap(movable) {
-  console.log(movable);
-  var url = window.location.href;
-  r1 = document.getElementById("swap1r").value-1;
-  c1 = document.getElementById("swap1c").value-1;
-  r2 = document.getElementById("swap2r").value-1;
-  c2 = document.getElementById("swap2c").value-1;
-  if (r1 > -1) {
-    r1 = r1*2 + Math.floor(c1/3);
-    c1 = c1 % 3;
-  }
-  if (r2 > -1) {
-    r2 = r2*2 + Math.floor(c2/3);
-    c2 = c2 % 3;
-  }
-  if (r1 > r2) {
-    if (movable.includes(r2.toString() + c2.toString() + r1.toString() + c1.toString())) {
-      console.log("included!!")
-    }
-    else console.log(r2.toString() + c2.toString() + r1.toString() + c1.toString())
-  }
-  else {
-    if (movable.includes(r1.toString() + c1.toString() + r2.toString() + c2.toString())) {
-      console.log("included!!")
-    }
-    else console.log(r2.toString() + c2.toString() + r1.toString() + c1.toString())
-  }
-  
-  console.log(url + r1.toString().padStart(2, "0") + r2.toString().padStart(2, "0") + c1.toString().padStart(2, "0") + c2.toString().padStart(2, "0"));
+
+function swap(newboard) {
+  window.location.href = "/zh/classical?setup="+newboard;
 }
 
 function highlightElement(name) {
@@ -129,7 +103,7 @@ function highlight(x, allPossible, raw) {
       temp += raw[0].slice(swap1*2+2, swap2*2);
       temp += raw[0].slice(swap1*2, swap1*2+2);
       temp += raw[0].slice(swap2*2+2, 64);
-      window.location.href = "classical?setup="+temp;
+      window.location.href = "/zh/classical?setup="+temp;
     }
     else {
       console.log("doesn't work :(")
@@ -140,7 +114,6 @@ function highlight(x, allPossible, raw) {
     }
   }
 }
-
 function highlightPair(thepair) {
   x1 = document.getElementById("domino"+thepair[0].toString())
   x2 = document.getElementById("domino"+thepair[1].toString())
@@ -154,33 +127,13 @@ function deHighlightPair(thepair) {
   x1.classList.remove('faintlyHighlighted');
   x2.classList.remove('faintlyHighlighted');
 }
-  
-function clickEffect(e){
-  var d=document.createElement("div");
-    let rng = Math.floor(Math.random() * 6)+1;
-  d.className="clickEffect"+rng.toString();
-  d.style.top=e.clientY+"px";d.style.left=e.clientX+"px";
-  document.body.appendChild(d);
-  d.addEventListener('animationend',function(){d.parentElement.removeChild(d);}.bind(this));
-}
-
-function congratulate() {
-  document.addEventListener('click', clickEffect, {
-  once: true
-});
-}
-
 
 </script>
 
 <div class="page-header hideOnPhone">
-  <h1>Classical Mode</h1>
+  <h1>经典模式</h1>
 </div>
-{% if classicalBoard.alrValid()|length==11 %}
-  <div id = "largest-container" class="big-container congratulate" onclick = "congratulate()">
-{% else %}
-  <div id = "largest-container" class="big-container">
-{% endif %}
+<div class="big-container">
   <div class="cb-container" id = "cb-container">
     {% if classicalBoard.isGoodPair( classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]) %}
       <div class="pair valid">
@@ -263,10 +216,24 @@ function congratulate() {
     {% endfor %}
   </div>
   <div class = "bigHintContainer">
-    <div>
-    <button onclick="onHint()" class = "solutionButtons">Possible Swaps</button>
-    <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons">Find a Solution</button>
-    <a href="/randomgame" class = "solutionButtons hideOnLaptop" style="display:none;">New Game</a>
+    <div style ="font-size: 105%;"> {{ classicalBoard.zhCouponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }}
+    {% if classicalBoard.solved %}
+      <button onclick="onRevealSol()" id = "reveal-hint" class = "inlineHintButton" style ="font-size: 105%;">逐步查看解答</button>
+    {% else %}
+      <button onclick="onHint()" class = "inlineHintButton" style ="font-size: 90%;">下一步的提示</button>
+      <br><div style = "font-size: 13px; margin: 4px 0 32px 0;font-weight: 300;">寻找解的算法是随机性的，具体为什么我也不记得了；刷新可能会有不一样的结果。</div>
+    {% endif %}
+    </div>
+    <div class = "hints">
+      {% for i in range(20)  %}
+        {% if classicalBoard.printableSolution|length > i %}
+            <div style= "display:none;"> {{ classicalBoard.swapRaw(classicalBoard.printableSolution[i][1], classicalBoard.printableSolution[i][2]) }}</div>
+            <a href = {{"/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;" onmouseover = "highlightPair({{classicalBoard.printableSolution[i][1:3]}})" onmouseout = "deHighlightPair({{classicalBoard.printableSolution[i][1:3]}})">
+            <pre><code>{{ classicalBoard.printableSolution[i][0] }}</pre></code>
+            </a>
+        {% endif %}
+      {% endfor %}
+    </div>
     <div id = "possibilities" class = "hints" style= "display:none;">
       {% for i in range(classicalBoard.printableMoves|length)  %}
             <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
@@ -274,16 +241,6 @@ function congratulate() {
             </a>
       {% endfor %}
     </div>
-    </div>
-    
-    <br><br>
-    
-    <div style= "display:none;">
-        Row <input id = "swap1r" type = "number" class = "swapNum"></input> Col <input id = "swap1c" type = "number" class = "swapNum"></input>
-        Row <input id = "swap2r" type = "number" class = "swapNum"></input> Col <input id = "swap2c" type = "number" class = "swapNum"></input>
-        <button onclick="onSubmitSwap( {{ classicalBoard.movable }} )">Swap</button>
-    </div>
-    
   </div>
 </div>
 {% endblock %}
