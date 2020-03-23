@@ -19,6 +19,10 @@
   src: url("../fonts/Montserrat-Light.ttf") format("truetype");
   font-weight: 300;
 }
+@font-face {
+  font-family: "Inconsolata";
+  src: url('../fonts/Inconsolata-Regular.ttf') format("truetype");
+}
 
 /*****************************************************************************
  * Main elements
@@ -243,13 +247,13 @@ a {
 
 @media(min-width: 1000px) {
   .bigHintContainer {
-    margin-left:160px;
+    margin-left:120px;
   }
 }
 
 @media(min-width: 1200px) {
   .bigHintContainer {
-    margin-left:200px;
+    margin-left:160px;
   }
 }
 
