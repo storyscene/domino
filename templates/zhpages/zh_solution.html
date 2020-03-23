@@ -228,7 +228,7 @@ function deHighlightPair(thepair) {
       {% for i in range(20)  %}
         {% if classicalBoard.printableSolution|length > i %}
             <div style= "display:none;"> {{ classicalBoard.swapRaw(classicalBoard.printableSolution[i][1], classicalBoard.printableSolution[i][2]) }}</div>
-            <a href = {{"/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;" onmouseover = "highlightPair({{classicalBoard.printableSolution[i][1:3]}})" onmouseout = "deHighlightPair({{classicalBoard.printableSolution[i][1:3]}})">
+            <a href = {{"/zh/classical?setup="+ classicalBoard.getActualRaw()}} id = {{ "hint" + i|string}} class = "hintContainer" style = "display:none;" onmouseover = "highlightPair({{classicalBoard.printableSolution[i][1:3]}})" onmouseout = "deHighlightPair({{classicalBoard.printableSolution[i][1:3]}})">
             <pre><code>{{ classicalBoard.printableSolution[i][0] }}</pre></code>
             </a>
         {% endif %}
@@ -236,7 +236,7 @@ function deHighlightPair(thepair) {
     </div>
     <div id = "possibilities" class = "hints" style= "display:none;">
       {% for i in range(classicalBoard.printableMoves|length)  %}
-            <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
+            <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/zh/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
             <pre><code>{{ classicalBoard.printableMoves[i][0] }}</pre></code>
             </a>
       {% endfor %}
