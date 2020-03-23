@@ -1,13 +1,18 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-
+<script>
+var language = window.navigator.userLanguage || window.navigator.language;
+if (language == "zh"){
+  window.location.href = "/zh"
+}
+</script>
 <div class="page-header">
   <h1>Welcome!</h1>
 </div>
 <p class = "lead" style = "font-size:12px;">* This site was copy pasted from some flask example project, and being delevoped right now, so most links don't work, and you can't create an account, and you probably won't ever be able to create an account since we host single-player games only. If you find bugs you should just tell me about them.<br>
-<p class="lead">This site hosts a game with complicated rules that you can view <a href = "/rules">here</a>.<br>
+<p class="lead">This site hosts <a href = "/randomgame">a game</a> with complicated rules that you can view <a href = "/rules">here</a>.<br>
 It might one day grow to host more obscure single-player games.<br><p>
 </p>
-
+<br>
 {% endblock %}

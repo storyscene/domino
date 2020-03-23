@@ -219,6 +219,7 @@ class classicalBoard:
             self.printableSolution = []
             self.updateRaw()
             self.updateTripletList()
+            self.solved = False
         else:
             self.flod = fLod
             self.lodominoes = loDominoes
@@ -229,6 +230,7 @@ class classicalBoard:
             self.printableMoves = []
             self.updateTripletList()
             self.updateRaw()
+            self.solved = False
     
     def __repr__(self):
         s = ""
@@ -416,7 +418,8 @@ class classicalBoard:
         print(validCount)
         if validCount == 11:
             print("DONE DONE DONE", level)
-            return " found in " + str(level) + " steps!"
+            self.solved = True
+            return "Found a solution with " + str(level) + " steps!"
         while level<20:
             level += 1
             #targetValidCount += 1
@@ -434,7 +437,8 @@ class classicalBoard:
                                 print("DONE DONE DONE", level)
                                 print(localVertex[1] + [changingState])
                                 self.printableSolution = formatPrintableSol(localVertex[1] + [changingState])
-                                return " found in " + str(level) + " steps!"
+                                self.solved = True
+                                return "Found a solution with " + str(level) + " steps!"
                             if validCount >= targetValidCount:
                                 targetValidCount = validCount + 1
                                 print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
@@ -454,7 +458,62 @@ class classicalBoard:
                 prevStateHistories = deepcopy(newStateHistories)
             print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
             print(level, "is done.")
-        return " not found in 20 steps. No hints are available :("
+        self.solved = False
+        return "Solution not found within 20 steps :("
+    
+    def zhCouponCollector(self, startState, lotrios, lopairs, lodominoes, BOUND):
+        prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
+        targetValidCount = len(validFromRaw(startState, lotrios, lopairs))+1
+        print("VALID FROM RAW", targetValidCount-1)
+        print(prevStateHistories)
+        #alreadyValid = validFromRaw(startState)
+        level = 0
+        validCount = len(validFromRaw(startState, lotrios, lopairs))
+        print(validCount)
+        if validCount == 11:
+            print("DONE DONE DONE", level)
+            self.solved = True
+            return "找到一个" + str(level) + "步的解!"
+        while level<20:
+            level += 1
+            #targetValidCount += 1
+            newStateHistories = []
+            found = False
+            for vertex in prevStateHistories:
+                for possibility in movableFromRaw(vertex[1][-1], lotrios, lopairs):
+                    if not found:
+                        changingState = deepcopy(vertex[1][-1])
+                        localVertex = deepcopy(vertex)
+                        swapRaw(changingState, possibility)
+                        if changingState not in localVertex[1]:
+                            validCount = len(validFromRaw(changingState, lotrios, lopairs))
+                            if validCount == 11:
+                                print("DONE DONE DONE", level)
+                                print(localVertex[1] + [changingState])
+                                self.printableSolution = formatPrintableSol(localVertex[1] + [changingState])
+                                self.solved = True
+                                return "找到一个" + str(level) + "步的解!"
+                            if validCount >= targetValidCount:
+                                targetValidCount = validCount + 1
+                                print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
+                                if targetValidCount == 11:
+                                    print(changingState)
+                                found = True
+                    if not found:
+                        newStateHistories += [[11-validCount, localVertex[1] + [changingState]]]
+                    else:
+                        newStateHistories = [[11-validCount, localVertex[1] + [changingState]]]
+                        prevStateHistories = deepcopy(newStateHistories)
+            if len(newStateHistories) > BOUND:
+                prevStateHistories = deepcopy(newStateHistories)
+                shuffle(prevStateHistories)
+                prevStateHistories = prevStateHistories[:BOUND]
+            else:
+                prevStateHistories = deepcopy(newStateHistories)
+            print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
+            print(level, "is done.")
+        self.solved = False
+        return ("没有在20步内找到解 :(")
     
     def movableFromRaw(self, raw, lotrios, lopairs):
         possible = []

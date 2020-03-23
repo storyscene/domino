@@ -1,4 +1,4 @@
-{% extends 'layouts/main.html' %}
+{% extends 'zhlayouts/zh_main.html' %}
 {% block title %}Classical{% endblock %}
 <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
 
@@ -15,27 +15,23 @@ function onStartInput() {
 }
 function onSubmitInput() {
   x = document.getElementById("inputBox");
-  window.location.href = "/classical?setup="+x.value;
-}
-var language = window.navigator.userLanguage || window.navigator.language;
-if (language == "zh"){
-  window.location.href = "/zh/prompt"
+  window.location.href = "/zh/classical?setup="+x.value;
 }
 
 </script>
 
 <div class="page-header">
-  <h1>Classical Mode</h1>
+  <h1>经典模式</h1>
 </div>
-<p class = "lead">Start a new game!<br> You can either input a game you are working on, or start a random game.</p>
+<p class = "lead">开始一局新的游戏！<br> 你可以手动输入已经开始的一局，也可以随机生成一局游戏。<br>[暂时不建议手动输入，因为输入不太容易]</p>
 <div class = "big-input-container">
 <div class = "select-mode">
-  <button onclick="onStartInput()" id = "inputPrompt">Input Your Own Game</button>
-  <a href="{{ url_for('randomgame') }}" class = "fakeButton" id = "randomGamePrompt">Random Game</a>
+  <button onclick="onStartInput()" id = "inputPrompt">手动输入</button>
+  <a href="{{ url_for('zhrandomgame') }}" class = "fakeButton" id = "randomGamePrompt">随机游戏</a>
 </div>
   <div style = "display:none;" id = "inputContainer" >
     <input type="text" style = "width: min(80%, 800px);" id = "inputBox"></input>
-    <button onclick="onSubmitInput()" class = "fakeButton">Submit</button>
+    <button onclick="onSubmitInput()" class = "fakeButton">完成</button>
   </div>
 </div>
 

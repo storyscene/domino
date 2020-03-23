@@ -5,6 +5,10 @@
 {% block content %}
 
 <script>
+var language = window.navigator.userLanguage || window.navigator.language;
+if (language == "zh"){
+  window.location.href = "/zh/solution"
+}
 function onStartInput() {
   x = document.getElementById("inputContainer");
   x.style.display = "inline-block";
@@ -20,13 +24,23 @@ function onSubmitInput() {
   window.location.href = "/classical?setup="+result;
 }
 var hintsDisplayed = 0
-function onHint() {
+function onRevealSol() {
   hintsDisplayed++;
   for (i = 0; i < hintsDisplayed; i++) {
     x = document.getElementById("hint"+i.toString())
     x.style.display = "block";
   }
 }
+function onHint() {  
+  x = document.getElementById("possibilities")
+  if (x.style.display == "block") {
+    x.style.display = "none";
+  }
+  else {
+    x.style.display = "block";
+  }
+}
+
 
 function swap(newboard) {
   window.location.href = "/classical?setup="+newboard;
@@ -206,8 +220,13 @@ function deHighlightPair(thepair) {
     {% endfor %}
   </div>
   <div class = "bigHintContainer">
-    <div> A solution was {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }}
-    <button onclick="onHint()" id = "reveal-hint" class = "inlineHintButton">Hint</button>
+    <div> {{ classicalBoard.couponCollector(classicalBoard.indicesraw, classicalBoard.lotrios, [[0, 0], [1, 8], [2, 2], [3, 7], [4, 4], [5, 5], [6, 6], [9, 12], [10, 13], [11, 11], [14, 16], [15, 15], [17, 17], [18, 18], [19, 19], [20, 20]], classicalBoard.lodominoes, 150) }}
+    {% if classicalBoard.solved %}
+      <button onclick="onRevealSol()" id = "reveal-hint" class = "inlineHintButton">Hint</button>
+    {% else %}
+      <button onclick="onHint()" class = "inlineHintButton">Possible Swaps</button>
+      <br><div style = "font-size: 13px; margin: 4px 0 32px 0;font-weight: 300;">The algorithm for solutions is somehow not deterministic; sometimes refreshing gives a different result.</div>
+    {% endif %}
     </div>
     <div class = "hints">
       {% for i in range(20)  %}
@@ -217,6 +236,13 @@ function deHighlightPair(thepair) {
             <pre><code>{{ classicalBoard.printableSolution[i][0] }}</pre></code>
             </a>
         {% endif %}
+      {% endfor %}
+    </div>
+    <div id = "possibilities" class = "hints" style= "display:none;">
+      {% for i in range(classicalBoard.printableMoves|length)  %}
+            <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
+            <pre><code>{{ classicalBoard.printableMoves[i][0] }}</pre></code>
+            </a>
       {% endfor %}
     </div>
   </div>

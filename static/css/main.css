@@ -165,7 +165,7 @@ a {
   }
 
   .bigHintContainer {
-    margin-left:64px;
+    margin-left:80px;
   }
 
   .big-input-container {
@@ -350,7 +350,7 @@ pre:hover {
   margin-right: 16px;
   color: rgb(31, 31, 31);
   border-bottom: 1px solid rgb(133, 61, 61);;
-  background-color: #fdfdfd;
+  background-color: #fbfbfb;
   padding: 4px 8px;
 }
 
@@ -550,4 +550,12 @@ div.clickEffect4{
     margin: -200px;
     opacity: 0;
   }
+}
+
+.chinese h1 {
+  font-weight: 400;
+}
+
+.chinese lead {
+  font-weight: 400;
 }

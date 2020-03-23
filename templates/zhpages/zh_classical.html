@@ -1,14 +1,10 @@
-{% extends 'layouts/main.html' %}
+{% extends 'zhlayouts/zh_main.html' %}
 {% block title %}Classical{% endblock %}
 <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
 
 {% block content %}
 
 <script>
-var language = window.navigator.userLanguage || window.navigator.language;
-if (language == "zh"){
-  window.location.href = "/zh/classical";
-}
 function onStartInput() {
   x = document.getElementById("inputContainer");
   x.style.display = "inline-block";
@@ -21,10 +17,10 @@ function onSubmitInput() {
   x = document.getElementById("inputBox");
   result = x.value.replace(/\s/g, '');
   console.log(result)
-  window.location.href = "/classical?setup="+result;
+  window.location.href = "/zh/classical?setup="+result;
 }
 function onSolve(raw) {
-  window.location.href = "/solution?setup="+raw[0];
+  window.location.href = "/zh/solution?setup="+raw[0];
 }
 
 function onHint() {  
@@ -129,7 +125,7 @@ function highlight(x, allPossible, raw) {
       temp += raw[0].slice(swap1*2+2, swap2*2);
       temp += raw[0].slice(swap1*2, swap1*2+2);
       temp += raw[0].slice(swap2*2+2, 64);
-      window.location.href = "classical?setup="+temp;
+      window.location.href = "/zh/classical?setup="+temp;
     }
     else {
       console.log("doesn't work :(")
@@ -174,7 +170,7 @@ function congratulate() {
 </script>
 
 <div class="page-header hideOnPhone">
-  <h1>Classical Mode</h1>
+  <h1>经典模式</h1>
 </div>
 {% if classicalBoard.alrValid()|length==11 %}
   <div id = "largest-container" class="big-container congratulate" onclick = "congratulate()">
@@ -264,9 +260,9 @@ function congratulate() {
   </div>
   <div class = "bigHintContainer">
     <div>
-    <button onclick="onHint()" class = "solutionButtons">Possible Swaps</button>
-    <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons">Find a Solution</button>
-    <a href="/randomgame" class = "solutionButtons hideOnLaptop" style="display:none;">New Game</a>
+    <button onclick="onHint()" class = "solutionButtons" style ="font-size: 105%;">提示</button>
+    <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons"  style ="font-size: 105%;">寻找解法</button>
+    <a href="/randomgame" class = "solutionButtons hideOnLaptop" style="display:none;">新游戏e</a>
     <div id = "possibilities" class = "hints" style= "display:none;">
       {% for i in range(classicalBoard.printableMoves|length)  %}
             <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
@@ -278,11 +274,6 @@ function congratulate() {
     
     <br><br>
     
-    <div style= "display:none;">
-        Row <input id = "swap1r" type = "number" class = "swapNum"></input> Col <input id = "swap1c" type = "number" class = "swapNum"></input>
-        Row <input id = "swap2r" type = "number" class = "swapNum"></input> Col <input id = "swap2c" type = "number" class = "swapNum"></input>
-        <button onclick="onSubmitSwap( {{ classicalBoard.movable }} )">Swap</button>
-    </div>
     
   </div>
 </div>
