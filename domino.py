@@ -858,7 +858,7 @@ cb.manualUpdate([4,4,4,6,3,5,2,2,2,3,5,6,1,5,1,6,1,4,5,6,4,6,4,4,3,3,3,6,4,5,6,6
 
 
 '''
-cb = classicalBoard(lodominoes, flod, lotrios)
+#cb = classicalBoard(lodominoes, flod, lotrios)
 
 '''
 #raw = "4446352223561516145646443336456622166613112624255534331315551211" 
@@ -888,3 +888,35 @@ print(results)
 '''
 cb.couponCollector(raw,  lotrios, lopairs, lodominoes, 200)
 '''
+
+'''
+d = {}
+for i in range(21):
+    for tr in lotrios:
+        trcopy = deepcopy(tr)
+        if i in tr:
+            trcopy.remove(i)
+            if i in d:
+                d[i] += [trcopy]
+            else:
+                d[i] = [trcopy]
+print(d)
+
+dDouble = {}
+for i in range(21):
+    for j in range(i+1, 21):
+        for tr in lotrios:
+            trcopy = deepcopy(tr)
+            if i in tr and j in tr:
+                trcopy.remove(i)
+                trcopy.remove(j)
+                if format(i, '02d') + format(j, '02d') in dDouble:
+                    dDouble[format(i, '02d') + format(j, '02d')] += trcopy
+                else:
+                    dDouble[format(i, '02d') + format(j, '02d')] = trcopy
+print(dDouble)
+
+for i in range(21):
+    for j in range(i+1, 21):
+        for ent in dDouble:
+            if dDouble[]'''
