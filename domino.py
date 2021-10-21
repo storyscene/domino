@@ -306,7 +306,7 @@ class classicalBoard:
     
     def indexCalculator(self, valone, valtwo):
         if valtwo < valone:
-            print(str(valone), "\t", str(valtwo), "\tincorrect input!")
+            # print(str(valone), "\t", str(valtwo), "\tincorrect input!")
             return None
         result = 0
         for i in range(valone-1):
@@ -389,7 +389,7 @@ class classicalBoard:
     def setFromRawInput(self, rawInput):
         raw = rawvaluestoindices(rawInput)
         self.updateTripletList(raw)
-        print("done")
+        # print("done")
 
     def swapRaw(self, i, j):
         temp = self.indicesraw[j]
@@ -403,21 +403,21 @@ class classicalBoard:
         for i in range(32):
             values += str(lodominoes[self.indicesraw[i]][1])
             values += str(lodominoes[self.indicesraw[i]][2])
-        print(values)
+        # print(values)
         return str(values)
 
 
     def couponCollector(self, startState, lotrios, lopairs, lodominoes, BOUND):
         prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
         targetValidCount = len(validFromRaw(startState, lotrios, lopairs))+1
-        print("VALID FROM RAW", targetValidCount-1)
-        print(prevStateHistories)
+        # print("VALID FROM RAW", targetValidCount-1)
+        # print(prevStateHistories)
         #alreadyValid = validFromRaw(startState)
         level = 0
         validCount = len(validFromRaw(startState, lotrios, lopairs))
-        print(validCount)
+        # print(validCount)
         if validCount == 11:
-            print("DONE DONE DONE", level)
+            # print("DONE DONE DONE", level)
             self.solved = True
             return "Found a solution with " + str(level) + " steps!"
         while level<20:
@@ -434,16 +434,14 @@ class classicalBoard:
                         if changingState not in localVertex[1]:
                             validCount = len(validFromRaw(changingState, lotrios, lopairs))
                             if validCount == 11:
-                                print("DONE DONE DONE", level)
-                                print(localVertex[1] + [changingState])
+                                # print("DONE DONE DONE", level)
+                                # print(localVertex[1] + [changingState])
                                 self.printableSolution = formatPrintableSol(localVertex[1] + [changingState])
                                 self.solved = True
                                 return "Found a solution with " + str(level) + " steps!"
                             if validCount >= targetValidCount:
                                 targetValidCount = validCount + 1
-                                print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
-                                if targetValidCount == 11:
-                                    print(changingState)
+                                # print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
                                 found = True
                     if not found:
                         newStateHistories += [[11-validCount, localVertex[1] + [changingState]]]
@@ -456,22 +454,22 @@ class classicalBoard:
                 prevStateHistories = prevStateHistories[:BOUND]
             else:
                 prevStateHistories = deepcopy(newStateHistories)
-            print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
-            print(level, "is done.")
+            # print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
+            # print(level, "is done.")
         self.solved = False
         return "Solution not found within 20 steps :("
     
     def zhCouponCollector(self, startState, lotrios, lopairs, lodominoes, BOUND):
         prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
         targetValidCount = len(validFromRaw(startState, lotrios, lopairs))+1
-        print("VALID FROM RAW", targetValidCount-1)
-        print(prevStateHistories)
+        # print("VALID FROM RAW", targetValidCount-1)
+        # print(prevStateHistories)
         #alreadyValid = validFromRaw(startState)
         level = 0
         validCount = len(validFromRaw(startState, lotrios, lopairs))
-        print(validCount)
+        # print(validCount)
         if validCount == 11:
-            print("DONE DONE DONE", level)
+            # print("DONE DONE DONE", level)
             self.solved = True
             return "找到一个" + str(level) + "步的解!"
         while level<20:
@@ -488,16 +486,14 @@ class classicalBoard:
                         if changingState not in localVertex[1]:
                             validCount = len(validFromRaw(changingState, lotrios, lopairs))
                             if validCount == 11:
-                                print("DONE DONE DONE", level)
-                                print(localVertex[1] + [changingState])
+                                # print("DONE DONE DONE", level)
+                                # print(localVertex[1] + [changingState])
                                 self.printableSolution = formatPrintableSol(localVertex[1] + [changingState])
                                 self.solved = True
                                 return "找到一个" + str(level) + "步的解!"
                             if validCount >= targetValidCount:
                                 targetValidCount = validCount + 1
-                                print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
-                                if targetValidCount == 11:
-                                    print(changingState)
+                                # print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
                                 found = True
                     if not found:
                         newStateHistories += [[11-validCount, localVertex[1] + [changingState]]]
@@ -510,8 +506,8 @@ class classicalBoard:
                 prevStateHistories = prevStateHistories[:BOUND]
             else:
                 prevStateHistories = deepcopy(newStateHistories)
-            print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
-            print(level, "is done.")
+            # print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
+            # print(level, "is done.")
         self.solved = False
         return ("没有在20步内找到解 :(")
     
@@ -545,7 +541,7 @@ class classicalBoard:
             if len(r)>0:
                 for k in range(len(r)//2):
                     possible += [str(i) + str(r[k*2]) + "*" + str(r[k*2+1])]
-        print(possible)
+        # print(possible)
         self.movable = possible
         tempResult = []
         for i in range(len(possible)):
@@ -577,7 +573,7 @@ class classicalBoard:
             newl = l[0:dom1*2] + l[dom2*2:dom2*2+2] + l[dom1*2+2:dom2*2] + l[dom1*2:dom1*2+2] + l[dom2*2+2:64]
             newerl = [dom1, dom2]
             tempResult += [[s, newl, newerl]]
-        print(tempResult)
+        # print(tempResult)
         self.printableMoves = tempResult
 
 
@@ -597,7 +593,7 @@ def formatPrintableSol(aListOfIndices):
         dom1 = lodominoes[aListOfIndices[i-1][swapped[0]]]
         dom2 = lodominoes[aListOfIndices[i-1][swapped[1]]]
         result += [[helperConvertToReadableCoordinate(swapped[0]) + " ("+ str(dom1[1]) + ", " + str(dom1[2]) + ")   " +   helperConvertToReadableCoordinate(swapped[1]) +   " (" + str(dom2[1]) + ", " + str(dom2[2]) + ")", swapped[0], swapped[1]]]
-    print(result)
+    # print(result)
     return result
 
 def helperCompareOneChange(l1, l2):
@@ -612,7 +608,7 @@ def helperCompareOneChange(l1, l2):
     if len(result)!= 2:
         print(" ---------------- WE THINK YOU MESSED UP AGAIN ---------------- ")
         print(" ------------- HOW DOES IT FEEL TO ALWAYS BE WRONG ------------- ")
-    print(result)
+    # print(result)
     return result
 
 def helperConvertToReadableCoordinate(num):
@@ -668,7 +664,8 @@ def findSol(cb, previndexstates, alreadyValid,i):
     possible = cb.movable()
     possible = prioritize(possible, alreadyValid)
     if curheight == 0:
-        print(possible)
+        pass
+        # print(possible)
     for possibility in possible:
         cbcopy = deepcopy(cb)
         cbcopy.move(possibility)
@@ -684,13 +681,13 @@ def findSol(cb, previndexstates, alreadyValid,i):
                     cbtemp = deepcopy(cbcopy)
                     cbtemp.indicesraw = indstate
                     cbtemp.updateTripletList()
-                    print(cbtemp)
-                print("DONE DONE DONE DONE DONE")
-                print(previs)
-                print(len(previs))
+                    # print(cbtemp)
+                # print("DONE DONE DONE DONE DONE")
+                # print(previs)
+                # print(len(previs))
                 return previs
             findSol(cbcopy, previs, valid, i+1)
-    print(i)
+    # print(i)
 
 def indicesRecur(raw, prevStates, alreadyValid, lotrios, lopairs, lodominoes, i):
     curheight = len(prevStates)
@@ -717,13 +714,13 @@ def indicesRecur(raw, prevStates, alreadyValid, lotrios, lopairs, lodominoes, i)
                     cbtemp.indicesraw = indstate
                     cbtemp.updateTripletList()
                     print(cbtemp)'''
-                print("DONE DONE DONE DONE DONE", validcopy, len(validcopy), curheight)
+                # print("DONE DONE DONE DONE DONE", validcopy, len(validcopy), curheight)
                 #print(prevst)
                 #print(len(prevst))
                 #return prevst
             #print(rawcopy, prevst, validcopy, i)
             if len(validcopy) == 11:
-                print(curheight)
+                # print(curheight)
                 '''for indstate in prevst:
                     cbtemp = classicalBoard(lodominoes, flod, lotrios)
                     cbtemp.indicesraw = indstate
@@ -733,15 +730,15 @@ def indicesRecur(raw, prevStates, alreadyValid, lotrios, lopairs, lodominoes, i)
             x = indicesRecur(rawcopy, prevst, validcopy, lotrios, lopairs, lodominoes, i+1)
             if x:
                 return x
-    print(i, alreadyValid)
+    # print(i, alreadyValid)
     
 def bfs(startState, lotrios, lopairs, lodominoes, maxheight, kLevelsAtATime, topNEachKLevels):
     prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
-    print(prevStateHistories)
+    # print(prevStateHistories)
     #alreadyValid = validFromRaw(startState)
     for jump in range(1, maxheight//kLevelsAtATime):
         for level in range(kLevelsAtATime):
-            print(len(prevStateHistories))
+            # print(len(prevStateHistories))
             newStateHistories = []
             for vertex in prevStateHistories:
                 for possibility in movableFromRaw(vertex[1][-1], lotrios, lopairs):
@@ -752,20 +749,20 @@ def bfs(startState, lotrios, lopairs, lodominoes, maxheight, kLevelsAtATime, top
                         '''here it is possible to save and print what actually swapped i suppose'''
                         validCount = len(validFromRaw(changingState, lotrios, lopairs))
                         if validCount == 11:
-                            print("DONE DONE DONE", jump*kLevelsAtATime+level)
-                            print(localVertex[1] + [changingState])
+                            # print("DONE DONE DONE", jump*kLevelsAtATime+level)
+                            # print(localVertex[1] + [changingState])
                             return jump*kLevelsAtATime+level
                         newStateHistories += [[11-validCount, localVertex[1] + [changingState]]]
             prevStateHistories = deepcopy(newStateHistories)
         newStateHistories = [min(newStateHistories)]
         prevStateHistories = deepcopy(newStateHistories)
-        print(newStateHistories)
-        print(jump, "is done.")
+        # print(newStateHistories)
+        # print(jump, "is done.")
 
 def couponCollector(startState, lotrios, lopairs, lodominoes, BOUND):
     prevStateHistories = [[len(validFromRaw(startState, lotrios, lopairs)), [startState]]]
     targetValidCount = len(validFromRaw(startState, lotrios, lopairs))+1
-    print(prevStateHistories)
+    # print(prevStateHistories)
     #alreadyValid = validFromRaw(startState)
     level = 0
     while level<20:
@@ -782,14 +779,12 @@ def couponCollector(startState, lotrios, lopairs, lodominoes, BOUND):
                     if changingState not in localVertex[1]:
                         validCount = len(validFromRaw(changingState, lotrios, lopairs))
                         if validCount == 11:
-                            print("DONE DONE DONE", level)
-                            print(localVertex[1] + [changingState])
+                            # print("DONE DONE DONE", level)
+                            # print(localVertex[1] + [changingState])
                             return level
                         if validCount >= targetValidCount:
                             targetValidCount = validCount + 1
-                            print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
-                            if targetValidCount == 11:
-                                print(changingState)
+                            # print("valid count", 11-validCount, "targetValidCount", 11-targetValidCount)
                             found = True
                 if not found:
                     newStateHistories += [[11-validCount, localVertex[1] + [changingState]]]
@@ -802,8 +797,8 @@ def couponCollector(startState, lotrios, lopairs, lodominoes, BOUND):
             prevStateHistories = prevStateHistories[:BOUND]
         else:
             prevStateHistories = deepcopy(newStateHistories)
-        print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
-        print(level, "is done.")
+        # print("new state length", len(newStateHistories), "valid count", 11-targetValidCount)
+        # print(level, "is done.")
     return 20
 
 def helperexistsalready(indraw, previndexstates):
@@ -844,7 +839,7 @@ def rawvaluestoindices(rawvals):
 
 def indexCalculator(valone, valtwo):
     if valtwo < valone:
-        print(str(valone), "\t", str(valtwo), "\tincorrect input!")
+        # print(str(valone), "\t", str(valtwo), "\tincorrect input!")
         return None
     result = 0
     for i in range(valone-1):

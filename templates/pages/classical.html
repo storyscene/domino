@@ -20,7 +20,7 @@ function onStartInput() {
 function onSubmitInput() {
   x = document.getElementById("inputBox");
   result = x.value.replace(/\s/g, '');
-  console.log(result)
+  // console.log(result)
   window.location.href = "/classical?setup="+result;
 }
 function onSolve(raw) {
@@ -38,7 +38,7 @@ function onHint() {
 }
 
 function onSubmitSwap(movable) {
-  console.log(movable);
+  // console.log(movable);
   var url = window.location.href;
   r1 = document.getElementById("swap1r").value-1;
   c1 = document.getElementById("swap1c").value-1;
@@ -52,20 +52,6 @@ function onSubmitSwap(movable) {
     r2 = r2*2 + Math.floor(c2/3);
     c2 = c2 % 3;
   }
-  if (r1 > r2) {
-    if (movable.includes(r2.toString() + c2.toString() + r1.toString() + c1.toString())) {
-      console.log("included!!")
-    }
-    else console.log(r2.toString() + c2.toString() + r1.toString() + c1.toString())
-  }
-  else {
-    if (movable.includes(r1.toString() + c1.toString() + r2.toString() + c2.toString())) {
-      console.log("included!!")
-    }
-    else console.log(r2.toString() + c2.toString() + r1.toString() + c1.toString())
-  }
-  
-  console.log(url + r1.toString().padStart(2, "0") + r2.toString().padStart(2, "0") + c1.toString().padStart(2, "0") + c2.toString().padStart(2, "0"));
 }
 
 function highlightElement(name) {
@@ -75,7 +61,7 @@ var selectedList = []
 
 function highlight(x, allPossible, raw) {
   var url = window.location.href;
-  console.log(selectedList)
+  // console.log(selectedList);
   if (selectedList.length == 2) {
     selectedList[0].classList.remove('shaky');
     selectedList[1].classList.remove('shaky');
@@ -97,7 +83,7 @@ function highlight(x, allPossible, raw) {
       swap1 = swap2;
       swap2 = temp;
     }
-    console.log(swap1, swap2);
+    // console.log(swap1, swap2);
     result = ""
     if (swap1 == 30) {
       result += "*0";
@@ -119,10 +105,10 @@ function highlight(x, allPossible, raw) {
       result += Math.floor(swap2/3).toString();
       result += (swap2%3).toString();
     }
-    console.log(result);
-    console.log(allPossible);
+    // console.log(result);
+    // console.log(allPossible);
     if (allPossible.includes(result)) {
-      console.log("YAY");
+      // console.log("YAY");
       temp = "";
       temp += raw[0].slice(0,swap1*2);
       temp += raw[0].slice(swap2*2, swap2*2+2);
@@ -132,7 +118,7 @@ function highlight(x, allPossible, raw) {
       window.location.href = "classical?setup="+temp;
     }
     else {
-      console.log("doesn't work :(")
+      // console.log("doesn't work :(")
       selectedList[0].classList.add('shaky');
       selectedList[1].classList.add('shaky');
       selectedList[0].classList.remove('faintlyHighlighted');
@@ -170,12 +156,14 @@ function congratulate() {
 });
 }
 
+function show_hint() {
+  let x = document.getElementById("possible-swap-explanation-overlay");
+  x.style.display = "flex";
+}
+
 
 </script>
 
-<div class="page-header hideOnPhone">
-  <h1>Classical Mode</h1>
-</div>
 {% if classicalBoard.alrValid()|length==11 %}
   <div id = "largest-container" class="big-container congratulate" onclick = "congratulate()">
 {% else %}
@@ -264,16 +252,17 @@ function congratulate() {
   </div>
   <div class = "bigHintContainer">
     <div>
-    <button onclick="onHint()" class = "solutionButtons">Possible Swaps</button>
-    <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons">Find a Solution</button>
-    <a href="/randomgame" class = "solutionButtons hideOnLaptop" style="display:none;">New Game</a>
-    <div id = "possibilities" class = "hints" style= "display:none;">
-      {% for i in range(classicalBoard.printableMoves|length)  %}
-            <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/zh/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
-            <pre><code>{{ classicalBoard.printableMoves[i][0] }}</pre></code>
-            </a>
-      {% endfor %}
-    </div>
+      <button onclick="onHint()" class = "solutionButtons">Possible Swaps</button>
+      <button onclick="onSolve( {{ [classicalBoard.getActualRaw()] }} )" class = "solutionButtons">Find a Solution</button>
+      <a href="/randomgame" class = "solutionButtons hideOnLaptop" style="display:none;">New Game</a>
+      <div id = "possibilities" class = "hints" style= "display:none;">
+        {% for i in range(classicalBoard.printableMoves|length)  %}
+              <a onmouseover = "highlightPair( {{classicalBoard.printableMoves[i][2]}} )" onmouseout = "deHighlightPair( {{classicalBoard.printableMoves[i][2]}} )" href = {{"/zh/classical?setup="+ classicalBoard.printableMoves[i][1]}} id = "possibleMove" class = "hintContainer" style = "margin:0px;">
+              <pre><code>{{ classicalBoard.printableMoves[i][0] }}</pre></code>
+              </a>
+        {% endfor %}
+        <button class="char-button hint-prompt-button" onclick="show_hint()">?</button>
+      </div>
     </div>
     
     <br><br>

@@ -16,7 +16,7 @@ function onStartInput() {
 function onSubmitInput() {
   x = document.getElementById("inputBox");
   result = x.value.replace(/\s/g, '');
-  console.log(result)
+  // console.log(result)
   window.location.href = "/zh/classical?setup="+result;
 }
 function onSolve(raw) {
@@ -34,7 +34,7 @@ function onHint() {
 }
 
 function onSubmitSwap(movable) {
-  console.log(movable);
+  // console.log(movable);
   var url = window.location.href;
   r1 = document.getElementById("swap1r").value-1;
   c1 = document.getElementById("swap1c").value-1;
@@ -48,20 +48,6 @@ function onSubmitSwap(movable) {
     r2 = r2*2 + Math.floor(c2/3);
     c2 = c2 % 3;
   }
-  if (r1 > r2) {
-    if (movable.includes(r2.toString() + c2.toString() + r1.toString() + c1.toString())) {
-      console.log("included!!")
-    }
-    else console.log(r2.toString() + c2.toString() + r1.toString() + c1.toString())
-  }
-  else {
-    if (movable.includes(r1.toString() + c1.toString() + r2.toString() + c2.toString())) {
-      console.log("included!!")
-    }
-    else console.log(r2.toString() + c2.toString() + r1.toString() + c1.toString())
-  }
-  
-  console.log(url + r1.toString().padStart(2, "0") + r2.toString().padStart(2, "0") + c1.toString().padStart(2, "0") + c2.toString().padStart(2, "0"));
 }
 
 function highlightElement(name) {
@@ -71,7 +57,7 @@ var selectedList = []
 
 function highlight(x, allPossible, raw) {
   var url = window.location.href;
-  console.log(selectedList)
+  // console.log(selectedList)
   if (selectedList.length == 2) {
     selectedList[0].classList.remove('shaky');
     selectedList[1].classList.remove('shaky');
@@ -93,7 +79,7 @@ function highlight(x, allPossible, raw) {
       swap1 = swap2;
       swap2 = temp;
     }
-    console.log(swap1, swap2);
+    // console.log(swap1, swap2);
     result = ""
     if (swap1 == 30) {
       result += "*0";
@@ -115,10 +101,10 @@ function highlight(x, allPossible, raw) {
       result += Math.floor(swap2/3).toString();
       result += (swap2%3).toString();
     }
-    console.log(result);
-    console.log(allPossible);
+    // console.log(result);
+    // console.log(allPossible);
     if (allPossible.includes(result)) {
-      console.log("YAY");
+      // console.log("YAY");
       temp = "";
       temp += raw[0].slice(0,swap1*2);
       temp += raw[0].slice(swap2*2, swap2*2+2);
@@ -128,7 +114,7 @@ function highlight(x, allPossible, raw) {
       window.location.href = "/zh/classical?setup="+temp;
     }
     else {
-      console.log("doesn't work :(")
+      // console.log("doesn't work :(")
       selectedList[0].classList.add('shaky');
       selectedList[1].classList.add('shaky');
       selectedList[0].classList.remove('faintlyHighlighted');
@@ -166,12 +152,8 @@ function congratulate() {
 });
 }
 
-
 </script>
 
-<div class="page-header hideOnPhone">
-  <h1>经典模式</h1>
-</div>
 {% if classicalBoard.alrValid()|length==11 %}
   <div id = "largest-container" class="big-container congratulate" onclick = "congratulate()">
 {% else %}

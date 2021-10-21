@@ -20,7 +20,7 @@ function onStartInput() {
 function onSubmitInput() {
   x = document.getElementById("inputBox");
   result = x.value.replace(/\s/g, '');
-  console.log(result)
+  // console.log(result)
   window.location.href = "/classical?setup="+result;
 }
 var hintsDisplayed = 0
@@ -53,7 +53,7 @@ var selectedList = []
 
 function highlight(x, allPossible, raw) {
   var url = window.location.href;
-  console.log(selectedList)
+  // console.log(selectedList)
   if (selectedList.length == 2) {
     selectedList[0].classList.remove('shaky');
     selectedList[1].classList.remove('shaky');
@@ -75,7 +75,7 @@ function highlight(x, allPossible, raw) {
       swap1 = swap2;
       swap2 = temp;
     }
-    console.log(swap1, swap2);
+    // console.log(swap1, swap2);
     result = ""
     if (swap1 == 30) {
       result += "*0";
@@ -97,10 +97,10 @@ function highlight(x, allPossible, raw) {
       result += Math.floor(swap2/3).toString();
       result += (swap2%3).toString();
     }
-    console.log(result);
-    console.log(allPossible);
+    // console.log(result);
+    // console.log(allPossible);
     if (allPossible.includes(result)) {
-      console.log("YAY");
+      // console.log("YAY");
       temp = "";
       temp += raw[0].slice(0,swap1*2);
       temp += raw[0].slice(swap2*2, swap2*2+2);
@@ -110,7 +110,7 @@ function highlight(x, allPossible, raw) {
       window.location.href = "classical?setup="+temp;
     }
     else {
-      console.log("doesn't work :(")
+      // console.log("doesn't work :(")
       selectedList[0].classList.add('shaky');
       selectedList[1].classList.add('shaky');
       selectedList[0].classList.remove('faintlyHighlighted');
@@ -134,9 +134,9 @@ function deHighlightPair(thepair) {
 
 </script>
 
-<div class="page-header hideOnPhone">
+<!-- <div class="page-header hideOnPhone">
   <h1>Classical Mode</h1>
-</div>
+</div> -->
 <div class="big-container">
   <div class="cb-container" id = "cb-container">
     {% if classicalBoard.isGoodPair( classicalBoard.indicesraw[30], classicalBoard.indicesraw[31]) %}

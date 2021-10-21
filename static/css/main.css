@@ -20,6 +20,11 @@
   font-weight: 300;
 }
 @font-face {
+  font-family: "Fira Sans";
+  src: url("../fonts/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+@font-face {
   font-family: "Inconsolata";
   src: url('../fonts/Inconsolata-Regular.ttf') format("truetype");
 }
@@ -151,7 +156,7 @@ a {
     display: grid;
     grid-template-columns: auto;
     justify-content: center;
-    margin-top: 12px;
+    margin: 24px 0;
   }
   
   .invisibleTag {
@@ -239,6 +244,7 @@ a {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: left;
+  margin: 28px 0;
 }
 
 
@@ -417,6 +423,60 @@ a {
 
 a,button {
   transition: all 0.05s;
+}
+
+.overlay {
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0003;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.overlayed-interior {
+  background-color: #fbfbfb;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px #0001;
+  max-height: 70vh;
+  display: flex;
+}
+
+#possible-swap-explanation, #rules-overlay-img {
+  margin: 30px 20px 30px 30px;
+}
+
+.char-button {
+  padding: 0;
+  margin: 8px;
+  border-bottom: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
+
+.close-button {
+  vertical-align: top;
+}
+
+button.hint-prompt-button {
+  margin-top: 32px;
+  margin-left: calc(100% - 24px);
+}
+
+#help-button {
+  position: fixed;
+  height: 36px;
+  width: 36px;
+  box-shadow: 2px 2px 4px #0002;
+  top: calc(100vh - 100px);
+  left: calc(100vw - 100px);
 }
 
 
